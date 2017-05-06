@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+    <h2>Apartment reservation system</h2>
+    <br />
+    <h3>Find the best accommodation deals</h3>
+    <table class="StartTable">
+        <thead>
+            <tr>
+                <th colspan="3">Destination</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3"><input class="sb-destination"/></td>
+            </tr>
+        </tbody>
+        <thead>
+            <tr>
+                <th>Date of arrival</th>
+                <th>Date of departure</th>
+                <th>Guests</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="text" id="departing"></td>
+                <td><input type="text" id="returning"></td>
+                <td><input type="text" id="count_picker"></td>
+            </tr>
+        </tbody>
+    </table>
+    <section class="contentButton">
+        <div class="Search">
+            <a rel="nofollow" class="button" href="">Search</a>
+        </div>
+        <div class="Search">
+            <a rel="nofollow" class="button" href="">Clear</a>
+        </div>
+    </section>
+
+</div>

@@ -33,13 +33,19 @@ namespace MiA_projekt.Models.AccountViewModels
         [Required]
         [StringLength(100, ErrorMessage = "The field can not be empty.", MinimumLength = 6)]
         [DataType(DataType.Text)]
-        [Display(Name = "Name")]
+        [Display(Name = "Surname")]
         public string Surname { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The field can not be empty.", MinimumLength = 6)]
         [DataType(DataType.Text)]
-        [Display(Name = "Name")]
+        [Display(Name = "Address")]
         public string Address { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "Enter correct number.", MinimumLength = 6)]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "PhoneNumber")]
+        public string PhoneNumber { get; set; }
     }
 }

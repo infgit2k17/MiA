@@ -39,6 +39,10 @@ namespace MiA_projekt.Controllers
 
         public IActionResult Description()
         {
+            String[] tab = { "ala", "ola", "ela", "marysia" };
+            ViewData["Description"] = "Opis apartamentu";
+            ViewData["Comments"] = tab;
+
             return View();
         }
     }

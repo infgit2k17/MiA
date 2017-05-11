@@ -23,5 +23,23 @@ namespace MiA_projekt.Models.AccountViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The field can not be empty.", MinimumLength = 6)]
+        [DataType(DataType.Text)]
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The field can not be empty.", MinimumLength = 6)]
+        [DataType(DataType.Text)]
+        [Display(Name = "Name")]
+        public string Surname { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The field can not be empty.", MinimumLength = 6)]
+        [DataType(DataType.Text)]
+        [Display(Name = "Name")]
+        public string Address { get; set; }
     }
 }

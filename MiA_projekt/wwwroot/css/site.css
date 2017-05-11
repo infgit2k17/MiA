@@ -272,22 +272,49 @@ img {
     margin-top: 15px;
 }
 
-.hotel-description-div {
+.hotel-description-div, .rating {
     width: 90%;
     margin: 0 auto;
+    margin-top: 5px;
 }
 
 .hotel-description-div {
     background-color: #ffffff;
     border: 1px solid black;
-    opacity: 0.5;
+    background-color: rgba(0, 0, 0, 0.6);
     filter: alpha(opacity=60); /* For IE8 and earlier */
-    border-radius: 2%;
 }
 
-    .hotel-description-div p {
-        margin: 5%;
-        font-weight: bold;
-        color: #000000;
-        text-align: justify;
-    }
+.hotel-description-div p {
+    margin: 5%;
+    font-weight: bold;
+    color: #000000;
+    text-align: justify;
+}
+
+.rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    text-align:left;
+}
+
+.rating > span {
+    display: inline-block;
+    position: relative;
+    width: 1.6em;
+    font-size: 30px;
+    color: gold;
+}
+
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+    content: "\2605";
+    position: absolute;
+}
+
+.rating p{
+    display:inline-block;
+    font-size:30px;
+    color:snow;
+    margin-right:20px;
+}

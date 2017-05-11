@@ -36,8 +36,10 @@ namespace MiA_projekt.Models.AccountViewModels
         [Display(Name = "Surname")]
         public string Surname { get; set; }
 
+        public string Gender { get; set; }
+
         [Required]
-        [StringLength(100, ErrorMessage = "The field can not be empty.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Enter correct address.", MinimumLength = 6)]
         [DataType(DataType.Text)]
         [Display(Name = "Address")]
         public string Address { get; set; }
@@ -45,7 +47,7 @@ namespace MiA_projekt.Models.AccountViewModels
         [Required]
         [StringLength(100, ErrorMessage = "Enter correct number.", MinimumLength = 6)]
         [DataType(DataType.PhoneNumber)]
-        [Display(Name = "PhoneNumber")]
+        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
     }
 }

@@ -27,22 +27,19 @@ namespace MiA_projekt.Models.AccountViewModels
         [StringLength(100, ErrorMessage = "The field can not be empty.", MinimumLength = 6)]
         public string Surname { get; set; }
 
-        public string Gender { get; set; }
-
         [Required]
-        [StringLength(100, ErrorMessage = "Enter correct address.", MinimumLength = 6)]
-        [DataType(DataType.Text)]
-        [Display(Name = "Address")]
-        public string Address { get; set; }
-
         public string Street { get; set; }
 
+        [Required]
         public string City { get; set; }
 
+        [Required]
         public string PostalCode { get; set; }
 
+        [Required]
         public string CountryCode { get; set; }
 
+        [Required]
         public bool Sex { get; set; }
 
         [Required]

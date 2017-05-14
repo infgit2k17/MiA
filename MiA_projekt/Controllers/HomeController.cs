@@ -17,6 +17,7 @@ namespace MiA_projekt.Controllers
                 return BadRequest("Please specify search parameters");
 
             ViewData["hotelResults"] = 800; // liczba hoteli dla konkretnego wyszukania
+
             return View();
         }
 

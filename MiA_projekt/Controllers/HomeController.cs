@@ -16,6 +16,9 @@ namespace MiA_projekt.Controllers
         public IActionResult Search()
         {
             ViewData["hotelResults"] = 800; // liczba hoteli dla konkretnego wyszukania
+
+
+
             return View();
         }
 

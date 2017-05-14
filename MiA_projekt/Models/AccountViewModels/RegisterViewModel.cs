@@ -34,9 +34,11 @@ namespace MiA_projekt.Models.AccountViewModels
         public string City { get; set; }
 
         [Required]
+        [DisplayName("Postal Code")]
         public string PostalCode { get; set; }
 
         [Required]
+        [DisplayName("Country")]
         public string CountryCode { get; set; }
 
         [Required]

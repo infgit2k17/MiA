@@ -17,8 +17,6 @@ namespace MiA_projekt.Controllers
         {
             ViewData["hotelResults"] = 800; // liczba hoteli dla konkretnego wyszukania
 
-
-
             return View();
         }
 

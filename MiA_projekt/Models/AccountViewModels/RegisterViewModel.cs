@@ -10,7 +10,7 @@ namespace MiA_projekt.Models.AccountViewModels
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 8)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
@@ -20,11 +20,11 @@ namespace MiA_projekt.Models.AccountViewModels
         public string ConfirmPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The field can not be empty.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "The field can not be empty.", MinimumLength = 1)]
         public string Name { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The field can not be empty.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "The field can not be empty.", MinimumLength = 1)]
         public string Surname { get; set; }
 
         [Required]

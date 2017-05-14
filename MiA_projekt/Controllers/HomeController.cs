@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MiA_projekt.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace MiA_projekt.Controllers
 {
@@ -13,8 +11,11 @@ namespace MiA_projekt.Controllers
             return View();
         }
 
-        public IActionResult Search()
+        public IActionResult Search(SearchViewModel vm)
         {
+            if (vm == null || !ModelState.IsValid)
+                return BadRequest("Please specify search parameters");
+
             ViewData["hotelResults"] = 800; // liczba hoteli dla konkretnego wyszukania
             return View();
         }

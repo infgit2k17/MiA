@@ -8,80 +8,50 @@
     <h2>Apartment reservation system</h2>
     <div id="basiclayout">
         <div id="right" class="rlt-right">
-            <div class="SearchOffer">
-                <table>
-                    <thead>
-                        <tr>
-                            <th colspan="3">
-                                <select class="sortSelect">
-                                    <option>Sort by price</option>
-                                    <option>Sort by rating</option>
-                                    <option>Sort by distance</option>
-                                </select>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <h5>PURO Poznań Stare Miasto</h5>
-                                <img src="~/images/1.jpg" alt="" style="width:304px;height:228px;">
-                            </td>
-                            <td>
-                                Stars: 4
-                                <br />
-                                <br />
-                                70$
-                            </td>
-                            <td>
-                                <section class="contentButton">
-                                    <div class="Search">
-                                        <a rel="nofollow" class="button" href="">View deal</a>
-                                    </div>
-                                </section>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>Ilonn</h5>
-                                <img src="~/images/2.jpeg" alt="" style="width:304px;height:228px;">
-                            </td>
-                            <td>
-                            Stars: 5 
-                                <br/>
-                                <br />
-                            100$
-                            </td>
-                            <td>
-                                <section class="contentButton">
-                                    <div class="Search">
-                                        <a rel="nofollow" class="button" href="">View deal</a>
-                                    </div>
-                                </section>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>Gold</h5>
-                                <img src="~/images/3.jpeg" alt="" style="width:304px;height:228px;">
-                            </td>
-                            <td>
-                                Stars: 3.5
-                                <br />
-                                <br />
-                                25$
-                            </td>
-                            <td>
-                                <section class="contentButton">
-                                    <div class="Search">
-                                        <a rel="nofollow" class="button" href="">View deal</a>
-                                    </div>
-                                </section>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="hotel-description-div">
+                <div class="SeachHeaderPart">
+                    <h4>Number of ads: @ViewData["hotelResults"]</h4>
+                </div>
+                <select class="sortSelect">
+                    <option>Sort by price</option>
+                    <option>Sort by rating</option>
+                    <option>Sort by distance</option>
+                </select>
             </div>
+        @for (int i = 0; i < 10; i++)
+        {
+            <div class="Search_offer">
+                <div class="left_img">
+                    <img class="imag" src="~/images/1.jpg" />
+                </div>
+                <div class="right_desc">
+                    <div class="SearchOffleft" style="border-left:1px solid #000;">
+                        <h4 style="font-weight: bold">$$TITLE</h4>
+                        <h5>$$$Address</h5>
+                    </div>
+                    <div class="SearchOffleft" style="border-left:1px solid #000;">
+                        <h4 style="font-weight: bold">$$RATING</h4>
+                        <div class="ratingx">
+                               <input name="stars" id="e5" type="radio"><label for="e5">☆</label>
+                                <input name="stars" id="e4" type="radio"><label for="e4">☆</label>
+                                <input name="stars" id="e3" type="radio"><label for="e3">☆</label>
+                                <input name="stars" id="e2" type="radio"><label for="e2">☆</label>
+                                <input name="stars" id="e1" type="radio"><label for="e1">☆</label>
+                        </div>
+                        <h5>$$średnia liczba</h5>
+                    </div>
+                    <div class="SearchOffleft" style="border-left:1px solid #000;">
+                        <h4 style="font-weight: bold">PRICE:</h4>
+                        <h5>$$$$$cena</h5>
+                        <section class="contentButton">
+                            <div class="Searchv2">
+                                <a rel="nofollow" class="buttonv2" href="">Check offer</a>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        }
         </div>
         <div id="left" class="rlt-left">
             <table class="StartTable">
@@ -137,3 +107,6 @@
     </div>
 
 </div>
+
+
+

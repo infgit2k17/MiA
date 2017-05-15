@@ -4,6 +4,7 @@
 
 <div class="main-search" data-ride="carousel">
     <h2>Apartment reservation system</h2>
+    <div asp-validation-summary="All" class="text-danger"></div>
     <br />
     <h3>Find the best accommodation deals</h3>
     <table class="StartTable">
@@ -14,7 +15,7 @@
         </thead>
         <tbody>
             <tr>
-                <td colspan="3"><input class="sb-destination" /></td>
+                <td colspan="3"><input class="sb-destination" id="destin"/></td>
             </tr>
         </tbody>
         <thead>
@@ -34,7 +35,8 @@
     </table>
     <section class="contentButton">
         <div class="Search">
-            <a rel="nofollow" class="button" href="">Search</a>
+            <button id="btnSerch" class="button" onclick="uriaction()">Search</button>
+            <!-- <a rel="nofollow" class="button" id="btnSerch" href="@Url.Action("Search", "Home", new { Destination = "Poznan", Arrival = "2017/10/10", Departure= "2017/11/11", Guests= 5 })">Search</a>-->
         </div>
         <div class="Search">
             <a rel="nofollow" class="button" href="">Clear</a>

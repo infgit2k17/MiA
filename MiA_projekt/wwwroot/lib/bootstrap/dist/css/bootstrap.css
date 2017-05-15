@@ -2976,7 +2976,7 @@ select[multiple].input-lg {
 }
 .form-horizontal .form-group {
   margin-right: -15px;
-  margin-left: 25px;
+  margin-left: -15px;
 }
 @media (min-width: 768px) {
   .form-horizontal .control-label {
@@ -4589,8 +4589,8 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #ccc;
 }
 .navbar-inverse {
-    background-color: #212121;
-    border-color: #080808;
+  background-color: #222;
+  border-color: #080808;
 }
 .navbar-inverse .navbar-brand {
   color: #9d9d9d;

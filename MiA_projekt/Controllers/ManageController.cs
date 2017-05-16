@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MiA_projekt.Models;
+using MiA_projekt.Models.ManageViewModels;
+using MiA_projekt.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using MiA_projekt.Models;
-using MiA_projekt.Models.ManageViewModels;
-using MiA_projekt.Services;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MiA_projekt.Controllers
 {
@@ -20,7 +18,6 @@ namespace MiA_projekt.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly string _externalCookieScheme;
         private readonly IEmailSender _emailSender;
-        private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
 
         public ManageController(
@@ -28,14 +25,12 @@ namespace MiA_projekt.Controllers
           SignInManager<AppUser> signInManager,
           IOptions<IdentityCookieOptions> identityCookieOptions,
           IEmailSender emailSender,
-          ISmsSender smsSender,
           ILoggerFactory loggerFactory)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _externalCookieScheme = identityCookieOptions.Value.ExternalCookieAuthenticationScheme;
             _emailSender = emailSender;
-            _smsSender = smsSender;
             _logger = loggerFactory.CreateLogger<ManageController>();
         }
 
@@ -96,26 +91,26 @@ namespace MiA_projekt.Controllers
             return View();
         }
 
-        //
-        // POST: /Manage/AddPhoneNumber
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-            // Generate the token and send it
-            var user = await GetCurrentUserAsync();
-            if (user == null)
-            {
-                return View("Error");
-            }
-            var code = await _userManager.GenerateChangePhoneNumberTokenAsync(user, model.PhoneNumber);
-            await _smsSender.SendSmsAsync(model.PhoneNumber, "Your security code is: " + code);
-            return RedirectToAction(nameof(VerifyPhoneNumber), new { PhoneNumber = model.PhoneNumber });
-        }
+        ////
+        //// POST: /Manage/AddPhoneNumber
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(model);
+        //    }
+        //    // Generate the token and send it
+        //    var user = await GetCurrentUserAsync();
+        //    if (user == null)
+        //    {
+        //        return View("Error");
+        //    }
+        //    var code = await _userManager.GenerateChangePhoneNumberTokenAsync(user, model.PhoneNumber);
+        //    await _smsSender.SendSmsAsync(model.PhoneNumber, "Your security code is: " + code);
+        //    return RedirectToAction(nameof(VerifyPhoneNumber), new { PhoneNumber = model.PhoneNumber });
+        //}
 
         //
         // POST: /Manage/EnableTwoFactorAuthentication

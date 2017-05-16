@@ -10,6 +10,11 @@
 
 @model IEnumerable<ApartmentViewModel>
 
+@{ 
+    var today = DateTime.Today;
+}
+
+
 <div class="container body-content">
     <h2>Apartment reservation system</h2>
     <div id="basiclayout">
@@ -26,29 +31,33 @@
             </div>
             @foreach (var aparment in Model)
             {
+                var x = @aparment.RatingStars * 20;
                 <div class="Search_offer">
                     <div class="left_img">
                         <img class="imag" src="~/images/1.jpg" />
                     </div>
                     <div class="right_desc">
                         <div class="SearchOffleft" style="border-left:1px solid #000;">
-                            <h4 style="font-weight: bold">@aparment.Title</h4>
-                            <h5>$$$Address</h5>
+                            <h4 style="font-weight: bold; margin-top: 30px; line-height: 1.5;">@aparment.Title</h4>
                         </div>
                         <div class="SearchOffleft" style="border-left:1px solid #000;">
-                            <h4 style="font-weight: bold">$$RATING</h4>
-                            <div class="ratingx">
+                            <h4 style="font-weight: bold">RATING</h4>
+                            <div class="star-ratings-css">
+                                <div class="star-ratings-css-top" style="width: @x%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                                <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                            </div>
+                            <!--<div class="ratingx">
                                 <input name="stars" id="e5" type="radio"><label for="e5">☆</label>
                                 <input name="stars" id="e4" type="radio"><label for="e4">☆</label>
                                 <input name="stars" id="e3" type="radio"><label for="e3">☆</label>
                                 <input name="stars" id="e2" type="radio"><label for="e2">☆</label>
                                 <input name="stars" id="e1" type="radio"><label for="e1">☆</label>
-                            </div>
-                            <h5>@aparment.RatingStars</h5>
+                            </div>-->
+                            <h4 style="margin-top: 20px">@aparment.RatingStars.ToString("F")</h4>
                         </div>
                         <div class="SearchOffleft" style="border-left:1px solid #000;">
                             <h4 style="font-weight: bold">PRICE:</h4>
-                            <h5>@aparment.Price</h5>
+                            <h5>@aparment.Price $</h5>
                             <section class="contentButton">
                                 <div class="Searchv2">
                                     <a rel="nofollow" class="buttonv2" href="">Check offer</a>
@@ -68,7 +77,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="3"><input class="sb-destination" /></td>
+                        <td colspan="3"><input class="sb-destination" id="destin" /></td>
                     </tr>
                 </tbody>
                 <thead>
@@ -78,7 +87,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" class="sb-destination"></td>
+                        <td><input id="departing" type="date" min=@today></td>
                     </tr>
                 </tbody>
                 <thead>
@@ -88,7 +97,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" class="sb-destination"></td>
+                        <td><input id="returning" type="date"></td>
                     </tr>
                 </tbody>
                 <thead>
@@ -96,14 +105,14 @@
                         <th>Guests</th>
                     </tr>
                     <tr>
-                        <td><input type="text" class="sb-destination"></td>
+                        <td><input type="number" id="count_picker" min="1"></td>
                     </tr>
                 </thead>
             </table>
             <br />
             <section class="contentButton">
                 <div class="Search">
-                    <button id="btnSerch" class="button" onclick="uriaction()">Search</button>
+                    <button id="btnSerch" class="button" onclick="uriaction2()">Search</button>
                 </div>
                 <div class="Search">
                     <a rel="nofollow" class="button" href="">Clear</a>

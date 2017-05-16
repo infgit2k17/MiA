@@ -56,12 +56,11 @@ $(document).ready(function () {
 
 
 function uriaction() {
-    //alert("?Destination = " + $("#destin").val() + ' & Arrival=' + $("#departing").val() + ' & Departure=' + $("#returning").val() + ' &Guests=' + $("#count_picker").val());
-    //var url = @Url.Action("Search", "Home") +'?Destination=' + $("#destin").val() + '&Arrival=' + $("#departing").val() + '&Departure=' + $("#returning").val() + '&Guests=' + $("#count_picker").val();
-   // var ull = @Url.Action("Search", "Home") 
-    //var url = @Url.Action("Search", "Home", new { Destination = "Poznan", Arrival = "2017/10/10", Departure= "2017/11/11", Guests= 5 });
-    //alert(url);
     window.location.href = 'Home/Search?Destination=' + $("#destin").val() + '&Arrival=' + $("#departing").val() + '&Departure=' + $("#returning").val() + '&Guests=' + $("#count_picker").val();
+}
+
+function uriaction2() {
+    window.location.href = 'Search?Destination=' + $("#destin").val() + '&Arrival=' + $("#departing").val() + '&Departure=' + $("#returning").val() + '&Guests=' + $("#count_picker").val();
 }
 
 

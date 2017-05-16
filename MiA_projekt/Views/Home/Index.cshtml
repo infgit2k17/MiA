@@ -1,10 +1,10 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var today = DateTime.Today;
 }
 
 <div class="main-search" data-ride="carousel">
     <h2>Apartment reservation system</h2>
-    <div asp-validation-summary="All" class="text-danger"></div>
     <br />
     <h3>Find the best accommodation deals</h3>
     <table class="StartTable">
@@ -27,9 +27,9 @@
         </thead>
         <tbody>
             <tr>
-                <td><input type="text" id="departing"></td>
-                <td><input type="text" id="returning"></td>
-                <td><input type="text" id="count_picker"></td>
+                <td><input id="departing" type="date" min=@today></td>
+                <td><input id="returning" type="date"></td>
+                <td><input type="number" min="1" id="count_picker"></td>
             </tr>
         </tbody>
     </table>

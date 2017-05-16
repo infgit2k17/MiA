@@ -1,8 +1,7 @@
 ﻿// Write your Javascript code.
 
 $(document).ready(function () {
-    $("#departing").datepicker();
-    $("#returning").datepicker();
+    $("datepicker").datepicker({ format: 'dd/mm/yyyy', autoclose: true, todayBtn: 'linked' })
     $("button").click(function () {
         var selected = $("#dropdown option:selected").text();
         var departing = $("#departing").val();
@@ -14,6 +13,7 @@ $(document).ready(function () {
         }
     });
 });
+
 
 /*var sIndex = 11, offSet = 10, isPreviousEventComplete = true, isDataAvailable = true;
   
@@ -49,7 +49,20 @@ $(document).ready(function () {
 
 //http://www.dotnetbull.com/2013/05/browser-scroll-to-end-of-page-in-jquery.html
 
+$(document).ready(function () {
+    $("#departing").datepicker({ format: 'dd/mm/yyyy', autoclose: true, minData: new Date() })
+    $("#returning").datepicker({ format: 'dd/mm/yyyy', autoclose: true, minData: new Date() })
+    });
 
+
+function uriaction() {
+    //alert("?Destination = " + $("#destin").val() + ' & Arrival=' + $("#departing").val() + ' & Departure=' + $("#returning").val() + ' &Guests=' + $("#count_picker").val());
+    //var url = @Url.Action("Search", "Home") +'?Destination=' + $("#destin").val() + '&Arrival=' + $("#departing").val() + '&Departure=' + $("#returning").val() + '&Guests=' + $("#count_picker").val();
+   // var ull = @Url.Action("Search", "Home") 
+    //var url = @Url.Action("Search", "Home", new { Destination = "Poznan", Arrival = "2017/10/10", Departure= "2017/11/11", Guests= 5 });
+    //alert(url);
+    window.location.href = 'Home/Search?Destination=' + $("#destin").val() + '&Arrival=' + $("#departing").val() + '&Departure=' + $("#returning").val() + '&Guests=' + $("#count_picker").val();
+}
 
 
 //Odpoiwiedzialne za wyświetlanie modal
@@ -67,3 +80,5 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 }
+
+

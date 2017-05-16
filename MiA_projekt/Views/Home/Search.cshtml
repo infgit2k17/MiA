@@ -1,11 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
-<!--
-    <button id="myBtn">Open Modal</button>
+﻿<!--
+<button id="myBtn">Open Modal</button>
 <div id="myModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
@@ -14,13 +8,15 @@
 </div>
 -->
 
+@model IEnumerable<ApartmentViewModel>
+
 <div class="container body-content">
     <h2>Apartment reservation system</h2>
     <div id="basiclayout">
         <div id="right" class="rlt-right">
             <div class="hotel-description-div">
                 <div class="SeachHeaderPart">
-                    <h4>Number of ads: @ViewData["hotelResults"]</h4>
+                    <h4>Number of ads: @Model.Count()</h4>
                 </div>
                 <select class="sortSelect">
                     <option>Sort by price</option>
@@ -28,40 +24,40 @@
                     <option>Sort by distance</option>
                 </select>
             </div>
-        @for (int i = 0; i < 10; i++)
-        {
-            <div class="Search_offer">
-                <div class="left_img">
-                    <img class="imag" src="~/images/1.jpg" />
-                </div>
-                <div class="right_desc">
-                    <div class="SearchOffleft" style="border-left:1px solid #000;">
-                        <h4 style="font-weight: bold">$$TITLE</h4>
-                        <h5>$$$Address</h5>
+            @foreach (var aparment in Model)
+            {
+                <div class="Search_offer">
+                    <div class="left_img">
+                        <img class="imag" src="~/images/1.jpg" />
                     </div>
-                    <div class="SearchOffleft" style="border-left:1px solid #000;">
-                        <h4 style="font-weight: bold">$$RATING</h4>
-                        <div class="ratingx">
-                               <input name="stars" id="e5" type="radio"><label for="e5">☆</label>
+                    <div class="right_desc">
+                        <div class="SearchOffleft" style="border-left:1px solid #000;">
+                            <h4 style="font-weight: bold">@aparment.Title</h4>
+                            <h5>$$$Address</h5>
+                        </div>
+                        <div class="SearchOffleft" style="border-left:1px solid #000;">
+                            <h4 style="font-weight: bold">$$RATING</h4>
+                            <div class="ratingx">
+                                <input name="stars" id="e5" type="radio"><label for="e5">☆</label>
                                 <input name="stars" id="e4" type="radio"><label for="e4">☆</label>
                                 <input name="stars" id="e3" type="radio"><label for="e3">☆</label>
                                 <input name="stars" id="e2" type="radio"><label for="e2">☆</label>
                                 <input name="stars" id="e1" type="radio"><label for="e1">☆</label>
-                        </div>
-                        <h5>$$średnia liczba</h5>
-                    </div>
-                    <div class="SearchOffleft" style="border-left:1px solid #000;">
-                        <h4 style="font-weight: bold">PRICE:</h4>
-                        <h5>$$$$$cena</h5>
-                        <section class="contentButton">
-                            <div class="Searchv2">
-                                <a rel="nofollow" class="buttonv2" href="">Check offer</a>
                             </div>
-                        </section>
+                            <h5>@aparment.RatingStars</h5>
+                        </div>
+                        <div class="SearchOffleft" style="border-left:1px solid #000;">
+                            <h4 style="font-weight: bold">PRICE:</h4>
+                            <h5>@aparment.Price</h5>
+                            <section class="contentButton">
+                                <div class="Searchv2">
+                                    <a rel="nofollow" class="buttonv2" href="">Check offer</a>
+                                </div>
+                            </section>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
         </div>
         <div id="left" class="rlt-left">
             <table class="StartTable">
@@ -115,8 +111,4 @@
             </section>
         </div>
     </div>
-
 </div>
-
-
-

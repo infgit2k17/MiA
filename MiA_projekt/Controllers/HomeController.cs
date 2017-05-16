@@ -1,11 +1,21 @@
-﻿using MiA_projekt.Models;
+﻿using MiA_projekt.Data;
+using MiA_projekt.Manager;
+using MiA_projekt.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace MiA_projekt.Controllers
 {
     public class HomeController : Controller
     {
+        private AppDbContext _db;
+        private readonly ApartmentManager _manager;
+
+        public HomeController(AppDbContext db)
+        {
+            _db = db;
+            _manager = new ApartmentManager(db);
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -14,11 +24,9 @@ namespace MiA_projekt.Controllers
         public IActionResult Search(SearchViewModel vm)
         {
             if (vm == null || !ModelState.IsValid)
-                return BadRequest("Please specify search parameters");
+                return Error("Please specify search parameters.");
 
-            ViewData["hotelResults"] = 800; // liczba hoteli dla konkretnego wyszukania
-
-            return View();
+            return View(_manager.FindOffers(vm));
         }
 
         public IActionResult About()
@@ -35,9 +43,9 @@ namespace MiA_projekt.Controllers
             return View();
         }
 
-        public IActionResult Error()
+        public IActionResult Error(string message = "")
         {
-            return View();
+            return View("Error", message);
         }
 
         public IActionResult Description()

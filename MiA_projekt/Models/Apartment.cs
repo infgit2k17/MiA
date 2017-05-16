@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MiA_projekt.Models
 {
-    public class Apartment
+    public class Apartment // zdjęcia
     {
         [Key]
         public int Id { get; set; }
@@ -33,5 +33,9 @@ namespace MiA_projekt.Models
         public DateTime From { get; set; }
 
         public DateTime To { get; set; }
+
+        public int RatePoints { get; set; }
+
+        public int RatesCount { get; set; }
     }
 }

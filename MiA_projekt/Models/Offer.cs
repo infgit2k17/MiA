@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MiA_projekt.Models
 {
-    public class Offer // co ze zdjęciami?
+    public class Offer
     {
         [Key]
         public int Id { get; set; }

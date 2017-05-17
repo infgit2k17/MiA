@@ -8,6 +8,8 @@ namespace MiA_projekt.Models
         
         public string Title { get; set; }
 
+        public string Description { get; set; }
+
         public IEnumerable<string> Images { get; set; }
 
         public double RatingStars { get; set; }

@@ -540,3 +540,8 @@ fieldset {
     border-color: threedface;
     border-image: initial;
 }
+
+textarea {
+    resize: none;
+    width: 100%;
+}

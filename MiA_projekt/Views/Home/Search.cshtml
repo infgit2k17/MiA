@@ -8,12 +8,7 @@
 </div>
 -->
 
-@model IEnumerable<ApartmentViewModel>
-
-@{ 
-    var today = DateTime.Today;
-}
-
+@model IEnumerable<ApartmentVM>
 
 <div class="container body-content">
     <h2>Apartment reservation system</h2>
@@ -53,7 +48,7 @@
                             <h5>@aparment.Price $</h5>
                             <section class="contentButton">
                                 <div class="Searchv2">
-                                    <button id="btnCheck" class="buttonv2" href="">@Html.ActionLink("Description", "Description", new { id = aparment.id });</button> 
+                                    <button id="btnCheck" class="buttonv2" href="">@Html.ActionLink("Description", "Description", new { id = aparment.Id });</button> 
                                 </div>
                                @*@Html.ActionLink("Description", "Description", new { id = aparment.id }); *@ 
                                 
@@ -82,7 +77,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input id="departing" type="date" min=@today></td>
+                        <td><input id="departing" type="date" min=@DateTime.Today></td>
                     </tr>
                 </tbody>
                 <thead>

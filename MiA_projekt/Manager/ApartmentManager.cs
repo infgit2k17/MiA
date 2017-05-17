@@ -14,35 +14,40 @@ namespace MiA_projekt.Manager
             _db = db;
         }
 
-        public IEnumerable<ApartmentViewModel> FindOffers(SearchViewModel vm)
+        public IEnumerable<ApartmentVM> FindApartments(SearchViewModel vm)
         {
             return _db.Apartments.Where(o => o.GuestCount == vm.Guests &&
-                                  o.Address.City.ToLower() == vm.Destination &&
-                                  o.From <= vm.Arrival &&
-                                  o.To >= vm.Departure)
-                                  .Select(o =>
-                                            new ApartmentViewModel
-                                            {
-                                                id = o.Id,
-                                                ImageUrl = "TO DO",
-                                                Price = o.Price,
-                                                RatingStars = CalculateRates(o.RatePoints, o.RatesCount),
-                                                Title = o.Name
-                                            })
-                                  .ToList();
+                                             o.Address.City.ToLower().Contains(vm.Destination.ToLower()) &&
+                                             o.From <= vm.Arrival &&
+                                             o.To >= vm.Departure)
+                                .Select(o =>
+                                    new ApartmentVM
+                                    {
+                                        Id = o.Id,
+                                        ImageUrl = o.Image,
+                                        Price = o.Price,
+                                        RatingStars = CalculateRates(o.RatePoints, o.RatesCount),
+                                        Title = o.Name
+                                    });
         }
 
-        public ApartmentViewModel findApartmentbyId(int id)
+        public ApartmentDetailsVM GetAparmentDetails(int id)
         {
-            Apartment a = _db.Apartments.FirstOrDefault(o => o.Id == id);
-            return new ApartmentViewModel
+            Apartment a = _db.Apartments.Find(id);
+            return new ApartmentDetailsVM
             {
-                id = a.Id,
-                ImageUrl = "TO DO",
+                Id = a.Id,
+                Images = GetImages(a.Id),
                 Price = a.Price,
                 RatingStars = CalculateRates(a.RatePoints, a.RatesCount),
                 Title = a.Name
             };
+        }
+
+        private IEnumerable<string> GetImages(int apartmentId)
+        {
+            return _db.Images.Where(i => i.ApartmentId == apartmentId)
+                             .Select(i => i.Url);
         }
 
         private double CalculateRates(int ratePoints, int rateCount)

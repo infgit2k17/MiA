@@ -1,8 +1,8 @@
 ﻿namespace MiA_projekt.Models
 {
-    public class ApartmentViewModel
+    public class ApartmentVM
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         
         public string Title { get; set; }
 

@@ -40,7 +40,8 @@ namespace MiA_projekt.Manager
                 Images = GetImages(a.Id),
                 Price = a.Price,
                 RatingStars = CalculateRates(a.RatePoints, a.RatesCount),
-                Title = a.Name
+                Title = a.Name,
+                Description = a.Description
             };
         }
 

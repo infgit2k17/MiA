@@ -15,8 +15,7 @@
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
 input,
-select,
-textarea {
+select {
     max-width: 280px;
 }
 
@@ -291,7 +290,7 @@ img {
 }
 
 .hotel-description-div p {
-    margin: 5%;
+    margin: 2%;
     font-weight: bold;
     color: snow;
     text-align: justify;
@@ -527,4 +526,17 @@ img {
     color: snow;
     text-align: justify;
     margin:0;
+}
+
+fieldset {
+    display: block;
+    -webkit-margin-start: 2px;
+    -webkit-margin-end: 2px;
+    -webkit-padding-before: 0.35em;
+    -webkit-padding-start: 0.75em;
+    -webkit-padding-end: 0.75em;
+    -webkit-padding-after: 0.625em;
+    min-width: -webkit-min-content;
+    border-color: threedface;
+    border-image: initial;
 }

@@ -7,12 +7,10 @@ namespace MiA_projekt.Controllers
 {
     public class HomeController : Controller
     {
-        private AppDbContext _db;
         private readonly ApartmentManager _manager;
 
         public HomeController(AppDbContext db)
         {
-            _db = db;
             _manager = new ApartmentManager(db);
         }
 
@@ -26,7 +24,7 @@ namespace MiA_projekt.Controllers
             if (vm == null || !ModelState.IsValid)
                 return Error("Please specify search parameters.");
 
-            return View(_manager.FindOffers(vm));
+            return View(_manager.FindApartments(vm));
         }
 
         public IActionResult About()
@@ -50,8 +48,7 @@ namespace MiA_projekt.Controllers
 
         public IActionResult Description(int id)
         {
-            ApartmentViewModel apartment = _manager.findApartmentbyId(id);  
-            return View(apartment);
+            return View(_manager.GetAparmentDetails(id));
         }
     }
 }

@@ -545,4 +545,13 @@ img {
     z-index: 0;
 }
 
+.dl-horizontal dt{
+    color:snow;
+}
 
+.hotel-description-div .dl-horizontal p {
+    font-weight: bold;
+    color: snow;
+    text-align: justify;
+    margin:0;
+}

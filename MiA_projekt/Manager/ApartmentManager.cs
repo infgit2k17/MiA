@@ -23,12 +23,26 @@ namespace MiA_projekt.Manager
                                   .Select(o =>
                                             new ApartmentViewModel
                                             {
+                                                id = o.Id,
                                                 ImageUrl = "TO DO",
                                                 Price = o.Price,
                                                 RatingStars = CalculateRates(o.RatePoints, o.RatesCount),
                                                 Title = o.Name
                                             })
                                   .ToList();
+        }
+
+        public ApartmentViewModel findApartmentbyId(int id)
+        {
+            Apartment a = _db.Apartments.FirstOrDefault(o => o.Id == id);
+            return new ApartmentViewModel
+            {
+                id = a.Id,
+                ImageUrl = "TO DO",
+                Price = a.Price,
+                RatingStars = CalculateRates(a.RatePoints, a.RatesCount),
+                Title = a.Name
+            };
         }
 
         private double CalculateRates(int ratePoints, int rateCount)

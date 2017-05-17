@@ -48,9 +48,10 @@ namespace MiA_projekt.Controllers
             return View("Error", message);
         }
 
-        public IActionResult Description()
+        public IActionResult Description(int id)
         {
-            return View();
+            ApartmentViewModel apartment = _manager.findApartmentbyId(id);  
+            return View(apartment);
         }
     }
 }

@@ -4,10 +4,13 @@
 @{
 }
 
+@model ApartmentViewModel
+
 <div class="container body-content">
-    <h2>Title of the apartament</h2>
+    <h2>Offer description</h2>
     <div id="basiclayout">
         <div id="right" class="rlt-right">
+            <h3 style="font-size: 35px; margin-top: 10px; margin-bottom: 25px">@Model.Title</h3>
             <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
                 <ol class="carousel-indicators">
                     <li data-target="#myCarousel" data-slide-to="0" class=""></li>
@@ -43,7 +46,7 @@
                     <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><p>Rating</p>
                 </div>
                 <div class="hotel-description-div">
-                    <p>@ViewData["Description"]</p>
+                    <p></p>
                 </div>
                 <div class="hotel-description-div">
                     <p>@ViewData["Comments"]</p>

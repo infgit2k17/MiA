@@ -22,7 +22,10 @@
             <div class="form-group">
                 <label asp-for="Description" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
-                    <input asp-for="Description" class="form-control" />
+                    @*<input asp-for="Description" class="form-control" />*@
+                    <fieldset class="comment commentv2">
+                        <textarea asp-for="Description" cols="80" rows="4" name="tresc" class="expanded placeholder" placeholder="Description"></textarea>
+                    </fieldset>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
             </div>
@@ -42,7 +45,7 @@
             <div class="form-group">
                 <label asp-for="Image" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
-                    <input asp-for="Image" class="form-control" type="image" />
+                    <input asp-for="Image" class="form-control" type="file" accept="image/x-png,image/gif,image/jpeg"  multiple/>
                     <span asp-validation-for="Image" class="text-danger"></span>
                 </div>
             </div>
@@ -56,14 +59,14 @@
             <div class="form-group">
                 <label asp-for="From" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
-                    <input asp-for="From" class="form-control" type="date" />
+                    <input type="date" min=@DateTime.Today asp-for="From" class="form-control"/>
                     <span asp-validation-for="From" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label asp-for="To" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
-                    <input asp-for="To" class="form-control" type="date" />
+                    <input type="date" min=@DateTime.Today asp-for="To" class="form-control"/>
                     <span asp-validation-for="To" class="text-danger"></span>
                 </div>
             </div>

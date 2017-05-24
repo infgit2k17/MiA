@@ -59,13 +59,16 @@ namespace MiA_projekt.Controllers
             {
                 return View("Error");
             }
-            var model = new IndexViewModel //todog, dopisać ismoderator, is admin itp.
+            var model = new IndexViewModel
             {
                 HasPassword = await _userManager.HasPasswordAsync(user),
                 PhoneNumber = await _userManager.GetPhoneNumberAsync(user),
                 TwoFactor = await _userManager.GetTwoFactorEnabledAsync(user),
                 Logins = await _userManager.GetLoginsAsync(user),
-                BrowserRemembered = await _signInManager.IsTwoFactorClientRememberedAsync(user)
+                BrowserRemembered = await _signInManager.IsTwoFactorClientRememberedAsync(user),
+                IsAdmin = await _userManager.IsInRoleAsync(user, "Admin"),
+                IsHost = await _userManager.IsInRoleAsync(user, "Host"),
+                IsModerator = await _userManager.IsInRoleAsync(user, "Mod")
             };
             return View(model);
         }
@@ -244,7 +247,7 @@ namespace MiA_projekt.Controllers
         }
 
         [HttpPost]
-        public IActionResult ChangeAddress(ChangeAddressViewModel model)
+        public async Task<IActionResult> ChangeAddress(ChangeAddressViewModel model)
         {
             string userId = _userManager.GetUserId(HttpContext.User);
 

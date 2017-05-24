@@ -46,6 +46,7 @@ namespace MiA_projekt.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.ChangeAddressViewModel ? "Your address has been changed."
                 : "";
 
             var user = await GetCurrentUserAsync();
@@ -336,6 +337,16 @@ namespace MiA_projekt.Controllers
             return RedirectToAction(nameof(ManageLogins), new { Message = message });
         }
 
+        public IActionResult ChangeAddress()
+        {
+            return View();
+        }
+
+        public IActionResult AddOffer()
+        {
+            return View();
+        }
+
         #region Helpers
 
         private void AddErrors(IdentityResult result)
@@ -355,7 +366,8 @@ namespace MiA_projekt.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
-            Error
+            Error,
+            ChangeAddressViewModel
         }
 
         private Task<AppUser> GetCurrentUserAsync()

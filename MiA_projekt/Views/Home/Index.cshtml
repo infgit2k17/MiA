@@ -15,7 +15,7 @@
         </thead>
         <tbody>
             <tr>
-                <td colspan="3"><input class="sb-destination" id="destin"/></td>
+                <td colspan="3"><input class="sb-destination" id="destin" required/></td>
             </tr>
         </tbody>
         <thead>
@@ -27,9 +27,9 @@
         </thead>
         <tbody>
             <tr>
-                <td><input id="departing" type="date" min=@today></td>
-                <td><input id="returning" type="date"></td>
-                <td><input type="number" min="1" id="count_picker"></td>
+                <td><input id="departing" type="date" min=@today required></td>
+                <td><input id="returning" type="date" required></td>
+                <td><input type="number" min="1" id="count_picker" required></td>
             </tr>
         </tbody>
     </table>

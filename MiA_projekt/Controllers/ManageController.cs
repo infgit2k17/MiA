@@ -1,12 +1,13 @@
-﻿using MiA_projekt.Models;
+﻿using MiA_projekt.Data;
+using MiA_projekt.Models;
 using MiA_projekt.Models.ManageViewModels;
 using MiA_projekt.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,19 +21,22 @@ namespace MiA_projekt.Controllers
         private readonly string _externalCookieScheme;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private readonly AppDbContext _db;
 
         public ManageController(
           UserManager<AppUser> userManager,
           SignInManager<AppUser> signInManager,
           IOptions<IdentityCookieOptions> identityCookieOptions,
           IEmailSender emailSender,
-          ILoggerFactory loggerFactory)
+          ILoggerFactory loggerFactory,
+          AppDbContext db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _externalCookieScheme = identityCookieOptions.Value.ExternalCookieAuthenticationScheme;
             _emailSender = emailSender;
             _logger = loggerFactory.CreateLogger<ManageController>();
+            _db = db;
         }
 
         //
@@ -55,7 +59,7 @@ namespace MiA_projekt.Controllers
             {
                 return View("Error");
             }
-            var model = new IndexViewModel
+            var model = new IndexViewModel //todog, dopisać ismoderator, is admin itp.
             {
                 HasPassword = await _userManager.HasPasswordAsync(user),
                 PhoneNumber = await _userManager.GetPhoneNumberAsync(user),
@@ -242,8 +246,17 @@ namespace MiA_projekt.Controllers
         [HttpPost]
         public IActionResult ChangeAddress(ChangeAddressViewModel model)
         {
-            //todog
-            throw new NotImplementedException();
+            string userId = _userManager.GetUserId(HttpContext.User);
+
+            AppUser user = _db.Users.Include(e => e.Address).First(u => u.Id == userId);
+            Address address = user.Address;
+            address.City = model.City;
+            address.CountryCode = model.CountryCode;
+            address.PostalCode = model.PostalCode;
+            address.Street = model.Street;
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
         //
         // GET: /Manage/SetPassword

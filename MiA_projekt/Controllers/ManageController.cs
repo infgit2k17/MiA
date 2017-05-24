@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -238,6 +239,12 @@ namespace MiA_projekt.Controllers
             return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
         }
 
+        [HttpPost]
+        public IActionResult ChangeAddress(ChangeAddressViewModel model)
+        {
+            //todog
+            throw new NotImplementedException();
+        }
         //
         // GET: /Manage/SetPassword
         [HttpGet]

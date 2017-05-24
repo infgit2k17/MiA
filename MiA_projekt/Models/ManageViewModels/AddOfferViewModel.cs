@@ -21,5 +21,28 @@ namespace MiA_projekt.Models.ManageViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }*/
+
+        [Required]
+        public string Description { get; set; }
+
+        [Required]
+        public string Name { get; set; }
+
+        [Required]
+        public string Price { get; set; }
+
+        [Required]
+        public string Image { get; set; }
+
+        [Required]
+        [Display(Name = "Guest Count")]
+        public string GuestCount { get; set; }
+
+        [Required]
+        public string From { get; set; }
+
+        [Required]
+        public string To { get; set; }
+
     }
 }

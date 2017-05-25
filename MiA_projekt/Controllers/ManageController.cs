@@ -5,6 +5,7 @@ using MiA_projekt.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -365,7 +366,7 @@ namespace MiA_projekt.Controllers
             return View();
         }
 
-        //public async Task<IActionResult> AddOffer(AddOfferViewModel model)
+        //public async Task<IActionResult> AddApartment(AddApartmentVM model)
         //{
         //    //todog
         //}
@@ -376,9 +377,39 @@ namespace MiA_projekt.Controllers
         //}
 
 
-        public IActionResult AddOffer()
+        public IActionResult AddApartment()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddApartment(AddApartmentVM model)
+        {
+            if (!ModelState.IsValid)
+                return View("Error");
+
+            Address addr = _db.Addresses.Add(new Address
+            {
+                City = model.City,
+                CountryCode = model.CountryCode,
+                PostalCode = model.PostalCode,
+                Street = model.Street
+            }).Entity;
+            _db.SaveChanges();
+
+            _db.Apartments.Add(new Apartment
+            {
+                Addressid = addr.Id,
+                Description = model.Description,
+                From = model.From,
+                To = model.To,
+                GuestCount = model.GuestCount,
+                Image = model.Image,
+                Name = model.Name,
+                Price = model.Price
+            });
+
+            return RedirectToAction("Index");
         }
 
         #region Helpers

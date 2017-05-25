@@ -250,6 +250,10 @@ namespace MiA_projekt.Controllers
         [HttpPost]
         public async Task<IActionResult> ChangeAddress(ChangeAddressViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
             string userId = _userManager.GetUserId(HttpContext.User);
 
             AppUser user = _db.Users.Include(e => e.Address).First(u => u.Id == userId);

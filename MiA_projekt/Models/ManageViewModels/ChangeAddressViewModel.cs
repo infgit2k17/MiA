@@ -10,17 +10,19 @@ namespace MiA_projekt.Models.ManageViewModels
     public class ChangeAddressViewModel
     {
         [Required]
+        [StringLength(100, ErrorMessage = "This field is required")]
         public string Street { get; set; }
 
         [Required]
+        [StringLength(100, ErrorMessage = "This field is required")]
         public string City { get; set; }
 
         [Required]
-        [DisplayName("Postal Code")]
+        [StringLength(100, ErrorMessage = "This field is required")]
         public string PostalCode { get; set; }
 
         [Required]
-        [DisplayName("Country")]
+        [StringLength(100, ErrorMessage = "This field is required")]
         public string CountryCode { get; set; }
     }
 }

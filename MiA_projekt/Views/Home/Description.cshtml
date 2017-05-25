@@ -2,6 +2,7 @@
 
 @{
     var x = Model.RatingStars * 20;
+    var today = DateTime.Today;
 }
 
 <div class="container body-content">
@@ -60,7 +61,7 @@
                     <p>Description</p>
                     <p>@Model.Description</p>
                 </div>
-                <form asp-action="Add Offer"> @*tu powinna być inne asp-as*@
+                <form asp-action="Add Offer">
                     <div class="hotel-description-div">
                         <p>COMMENTS</p>
                         <fieldset class="comment">
@@ -84,7 +85,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="3"><input class="sb-destination" /></td>
+                        <td colspan="3"><input class="sb-destination" id="destin" /></td>
                     </tr>
                 </tbody>
                 <thead>
@@ -94,7 +95,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" class="sb-destination"></td>
+                        <td><input id="departing" type="date" min = @today required></td>
                     </tr>
                 </tbody>
                 <thead>
@@ -104,7 +105,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" class="sb-destination"></td>
+                        <td><input id="returning" type="date" min = @today required></td>
                     </tr>
                 </tbody>
                 <thead>
@@ -112,14 +113,14 @@
                         <th>Guests</th>
                     </tr>
                     <tr>
-                        <td><input type="text" class="sb-destination"></td>
+                        <td><input type="number" id="count_picker" min="1"></td>
                     </tr>
                 </thead>
             </table>
             <br />
             <section class="contentButton">
                 <div class="Search">
-                    <a rel="nofollow" class="button" href="">Search</a>
+                    <button id="btnSerch" class="button" onclick="uriaction2()">Search</button>
                 </div>
                 <div class="Search">
                     <a rel="nofollow" class="button" href="">Clear</a>

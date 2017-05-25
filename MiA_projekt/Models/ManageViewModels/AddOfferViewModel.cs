@@ -29,7 +29,7 @@ namespace MiA_projekt.Models.ManageViewModels
         public string Name { get; set; }
 
         [Required]
-        public string Price { get; set; }
+        public double Price { get; set; }
 
         [Required]
         public string Image { get; set; }
@@ -39,10 +39,10 @@ namespace MiA_projekt.Models.ManageViewModels
         public string GuestCount { get; set; }
 
         [Required]
-        public string From { get; set; }
+        public DateTime From { get; set; }
 
         [Required]
-        public string To { get; set; }
+        public DateTime To { get; set; }
 
     }
 }

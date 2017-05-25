@@ -1,6 +1,6 @@
 ﻿@model ApartmentDetailsVM
 
-@{ 
+@{
     var x = Model.RatingStars * 20;
 }
 
@@ -10,7 +10,7 @@
     <div id="basiclayout">
         <div id="right" class="rlt-right">
             <h3 style="font-size: 35px; margin-top: 10px; margin-bottom: 25px">@Model.Title</h3>
-            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">       
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
                 <ol class="carousel-indicators">
                     @foreach (var details in Model.Images)
                     {
@@ -24,22 +24,22 @@
                         }
                     }
                 </ol>
-                <div class="carousel-inner" role="listbox">                                 
-                     @foreach (var details in Model.Images)
-                     {
-                           @if (Model.Images.First()==details)
-                           {
+                <div class="carousel-inner" role="listbox">
+                    @foreach (var details in Model.Images)
+                    {
+                        @if (Model.Images.First() == details)
+                        {
                             <div class="item active" alt="Microsoft Azure" class="img-responsive">
                                 <img src="@details" class="img-responsive">
                             </div>
-                           }
-                           else
-                           {
+                        }
+                        else
+                        {
                             <div class="item">
                                 <img src="@details" class="img-responsive">
                             </div>
-                           }
-                     }                                                      
+                        }
+                    }
                 </div>
                 <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
                     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -60,17 +60,19 @@
                     <p>Description</p>
                     <p>@Model.Description</p>
                 </div>
-                <div class="hotel-description-div">
-                    <p>COMMENTS</p>
-                    <fieldset class="comment">
-                        <textarea cols="80" rows="4" name="tresc" class="expanded placeholder" placeholder="Leave a comment"></textarea>
-                    </fieldset>
-                    <section class="contentButton">
-                        <div class="Search">
-                            <button id="btnSerch" class="button">Comment</button>
-                        </div>
-                    </section>
-                </div>
+                <form asp-action="Add Offer"> @*tu powinna być inne asp-as*@
+                    <div class="hotel-description-div">
+                        <p>COMMENTS</p>
+                        <fieldset class="comment">
+                            <textarea cols="80" rows="4" name="tresc" class="expanded placeholder" placeholder="Leave a comment"></textarea>
+                        </fieldset>
+                        <section class="contentButton">
+                            <div class="Search">
+                                <button type="submit" class="button">Submit</button>
+                            </div>
+                        </section>
+                    </div>
+                </form>
             </div>
         </div>
         <div id="left" class="rlt-left">

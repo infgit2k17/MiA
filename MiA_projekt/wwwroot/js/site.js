@@ -1,18 +1,18 @@
 ﻿// Write your Javascript code.
 
-$(document).ready(function () {
-    $("datepicker").datepicker({ format: 'dd/mm/yyyy', autoclose: true, todayBtn: 'linked' })
-    $("button").click(function () {
-        var selected = $("#dropdown option:selected").text();
-        var departing = $("#departing").val();
-        var returning = $("#returning").val();
-        if (departing === "" || returning === "") {
-            alert("Please select departing and returning dates.");
-        } else {
-            confirm("Would you like to go to " + selected + " on " + departing + " and return on " + returning + "?");
-        }
-    });
-});
+//$(document).ready(function () {
+//    $("datepicker").datepicker({ format: 'dd/mm/yyyy', autoclose: true, todayBtn: 'linked' })
+//    $("button").click(function () {
+//        var selected = $("#dropdown option:selected").text();
+//        var departing = $("#departing").val();
+//        var returning = $("#returning").val();
+//        if (departing === "" || returning === "") {
+//            alert("Please select departing and returning dates.");
+//        } else {
+//            confirm("Would you like to go to " + selected + " on " + departing + " and return on " + returning + "?");
+//        }
+//    });
+//});
 
 
 /*var sIndex = 11, offSet = 10, isPreviousEventComplete = true, isDataAvailable = true;
@@ -49,10 +49,10 @@ $(document).ready(function () {
 
 //http://www.dotnetbull.com/2013/05/browser-scroll-to-end-of-page-in-jquery.html
 
-$(document).ready(function () {
-    $("#departing").datepicker({ format: 'dd/mm/yyyy', autoclose: true, minData: new Date() })
-    $("#returning").datepicker({ format: 'dd/mm/yyyy', autoclose: true, minData: new Date() })
-    });
+//$(document).ready(function () {
+//    $("#departing").datepicker({ format: 'dd/mm/yyyy', autoclose: true, minData: new Date() })
+//    $("#returning").datepicker({ format: 'dd/mm/yyyy', autoclose: true, minData: new Date() })
+//    });
 
 
 function uriaction() {

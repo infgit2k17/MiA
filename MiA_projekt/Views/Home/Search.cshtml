@@ -1,87 +1,62 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<!--
+<button id="myBtn">Open Modal</button>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Some text in the Modal..</p>
+    </div>
+</div>
+-->
+
+@model IEnumerable<ApartmentVM>
 
 <div class="container body-content">
     <h2>Apartment reservation system</h2>
     <div id="basiclayout">
         <div id="right" class="rlt-right">
-            <div class="SearchOffer">
-                <table>
-                    <thead>
-                        <tr>
-                            <th colspan="3">
-                                <select class="sortSelect">
-                                    <option>Sort by price</option>
-                                    <option>Sort by rating</option>
-                                    <option>Sort by distance</option>
-                                </select>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <h5>PURO Poznań Stare Miasto</h5>
-                                <img src="~/images/1.jpg" alt="" style="width:304px;height:228px;">
-                            </td>
-                            <td>
-                                Stars: 4
-                                <br />
-                                <br />
-                                70$
-                            </td>
-                            <td>
-                                <section class="contentButton">
-                                    <div class="Search">
-                                        <a rel="nofollow" class="button" href="">View deal</a>
-                                    </div>
-                                </section>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>Ilonn</h5>
-                                <img src="~/images/2.jpeg" alt="" style="width:304px;height:228px;">
-                            </td>
-                            <td>
-                            Stars: 5 
-                                <br/>
-                                <br />
-                            100$
-                            </td>
-                            <td>
-                                <section class="contentButton">
-                                    <div class="Search">
-                                        <a rel="nofollow" class="button" href="">View deal</a>
-                                    </div>
-                                </section>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>Gold</h5>
-                                <img src="~/images/3.jpeg" alt="" style="width:304px;height:228px;">
-                            </td>
-                            <td>
-                                Stars: 3.5
-                                <br />
-                                <br />
-                                25$
-                            </td>
-                            <td>
-                                <section class="contentButton">
-                                    <div class="Search">
-                                        <a rel="nofollow" class="button" href="">View deal</a>
-                                    </div>
-                                </section>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="hotel-description-div">
+                <div class="SeachHeaderPart">
+                    <h4>Number of ads: @Model.Count()</h4>
+                </div>
+                <select class="sortSelect">
+                    <option>Sort by price</option>
+                    <option>Sort by rating</option>
+                    <option>Sort by distance</option>
+                </select>
             </div>
+            @foreach (var aparment in Model)
+            {
+                var x = @aparment.RatingStars * 20;
+                <div class="Search_offer">
+                    <div class="left_img">
+                        <img class="imag" src="@aparment.ImageUrl" />
+                    </div>
+                    <div class="right_desc">
+                        <div class="SearchOffleft" style="border-left:1px solid #000;">
+                            <h4 style="font-weight: bold; margin-top: 30px; line-height: 1.5;">@aparment.Title</h4>
+                        </div>
+                        <div class="SearchOffleft" style="border-left:1px solid #000;">
+                            <h4 style="font-weight: bold">RATING</h4>
+                            <div class="star-ratings-css">
+                                <div class="star-ratings-css-top" style="width: @x%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                                <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                            </div>
+                            <h4 style="margin-top: 20px">@aparment.RatingStars.ToString("F")</h4>
+                        </div>
+                        <div class="SearchOffleft" style="border-left:1px solid #000;">
+                            <h4 style="font-weight: bold">PRICE:</h4>
+                            <h5>@aparment.Price $</h5>
+                            <section class="contentButton">
+                                <div class="Searchv2">
+                                    <button id="btnCheck" class="buttonv2" href="">@Html.ActionLink("Description", "Description", new { id = aparment.Id });</button> 
+                                </div>
+                               @*@Html.ActionLink("Description", "Description", new { id = aparment.id }); *@ 
+                                
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                                        }
         </div>
         <div id="left" class="rlt-left">
             <table class="StartTable">
@@ -92,7 +67,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="3"><input class="sb-destination" /></td>
+                        <td colspan="3"><input class="sb-destination" id="destin" /></td>
                     </tr>
                 </tbody>
                 <thead>
@@ -102,7 +77,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" class="sb-destination"></td>
+                        <td><input id="departing" type="date" min=@DateTime.Today></td>
                     </tr>
                 </tbody>
                 <thead>
@@ -112,7 +87,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" class="sb-destination"></td>
+                        <td><input id="returning" type="date"></td>
                     </tr>
                 </tbody>
                 <thead>
@@ -120,14 +95,14 @@
                         <th>Guests</th>
                     </tr>
                     <tr>
-                        <td><input type="text" class="sb-destination"></td>
+                        <td><input type="number" id="count_picker" min="1"></td>
                     </tr>
                 </thead>
             </table>
             <br />
             <section class="contentButton">
                 <div class="Search">
-                    <a rel="nofollow" class="button" href="">Search</a>
+                    <button id="btnSerch" class="button" onclick="uriaction2()">Search</button>
                 </div>
                 <div class="Search">
                     <a rel="nofollow" class="button" href="">Clear</a>
@@ -135,5 +110,4 @@
             </section>
         </div>
     </div>
-
 </div>

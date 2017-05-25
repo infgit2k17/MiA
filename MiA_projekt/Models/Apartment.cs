@@ -25,7 +25,7 @@ namespace MiA_projekt.Models
         [Range(1, 10000)]
         public decimal Price { get; set; }
 
-        // PhotoId
+        public string Image { get; set; }
 
         [Range(1, 1000)]
         public short GuestCount { get; set; }
@@ -33,5 +33,9 @@ namespace MiA_projekt.Models
         public DateTime From { get; set; }
 
         public DateTime To { get; set; }
+
+        public int RatePoints { get; set; }
+
+        public int RatesCount { get; set; }
     }
 }

@@ -12,6 +12,8 @@ namespace MiA_projekt.Data
 
         public DbSet<Address> Addresses { get; set; }
 
+        public DbSet<Image> Images { get; set; }
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         { }
     }

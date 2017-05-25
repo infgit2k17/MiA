@@ -1,33 +1,45 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model ApartmentDetailsVM
+
 @{
+    var x = Model.RatingStars * 20;
 }
 
 <div class="container body-content">
-    <h2>Title of the apartament</h2>
+    <h2>Offer description</h2>
+    <hr />
     <div id="basiclayout">
         <div id="right" class="rlt-right">
+            <h3 style="font-size: 35px; margin-top: 10px; margin-bottom: 25px">@Model.Title</h3>
             <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
                 <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class=""></li>
-                    <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-                    <li data-target="#myCarousel" data-slide-to="2" class=""></li>
-                    <li data-target="#myCarousel" data-slide-to="3" class="active"></li>
+                    @foreach (var details in Model.Images)
+                    {
+                        @if (Model.Images.First() == details)
+                        {
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        }
+                        else
+                        {
+                            <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+                        }
+                    }
                 </ol>
                 <div class="carousel-inner" role="listbox">
-                    <div class="item">
-                        <img src="/images/1.jpg" class="img-responsive">
-                    </div>
-                    <div class="item">
-                        <img src="/images/2.jpeg" class="img-responsive">
-                    </div>
-                    <div class="item">
-                        <img src="/images/3.jpeg" class="img-responsive">
-                    </div>
-                    <div class="item active">
-                        <img src="/images/banner4.svg" alt="Microsoft Azure" class="img-responsive">
-                    </div>
+                    @foreach (var details in Model.Images)
+                    {
+                        @if (Model.Images.First() == details)
+                        {
+                            <div class="item active" alt="Microsoft Azure" class="img-responsive">
+                                <img src="@details" class="img-responsive">
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="item">
+                                <img src="@details" class="img-responsive">
+                            </div>
+                        }
+                    }
                 </div>
                 <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
                     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -39,15 +51,28 @@
                 </a>
             </div>
             <div class="hotel-description">
-                <div class="rating">
-                    <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><p>Rating</p>
+                <p style="text-align:center; color:snow; font-size:20px">RATING</p>
+                <div class="star-ratings-css">
+                    <div class="star-ratings-css-top" style="width: @x%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                    <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
                 </div>
                 <div class="hotel-description-div">
-                    <p>@ViewData["Description"]</p>
+                    <p>Description</p>
+                    <p>@Model.Description</p>
                 </div>
-                <div class="hotel-description-div">
-                    <p>@ViewData["Comments"]</p>
-                </div>
+                <form asp-action="Add Offer"> @*tu powinna być inne asp-as*@
+                    <div class="hotel-description-div">
+                        <p>COMMENTS</p>
+                        <fieldset class="comment">
+                            <textarea cols="80" rows="4" name="tresc" class="expanded placeholder" placeholder="Leave a comment"></textarea>
+                        </fieldset>
+                        <section class="contentButton">
+                            <div class="Search">
+                                <button type="submit" class="button">Submit</button>
+                            </div>
+                        </section>
+                    </div>
+                </form>
             </div>
         </div>
         <div id="left" class="rlt-left">

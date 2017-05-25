@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+﻿using MiA_projekt.Data;
 using MiA_projekt.Models;
 using MiA_projekt.Models.ManageViewModels;
 using MiA_projekt.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MiA_projekt.Controllers
 {
@@ -20,23 +21,23 @@ namespace MiA_projekt.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly string _externalCookieScheme;
         private readonly IEmailSender _emailSender;
-        private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
+        private readonly AppDbContext _db;
 
         public ManageController(
           UserManager<AppUser> userManager,
           SignInManager<AppUser> signInManager,
           IOptions<IdentityCookieOptions> identityCookieOptions,
           IEmailSender emailSender,
-          ISmsSender smsSender,
-          ILoggerFactory loggerFactory)
+          ILoggerFactory loggerFactory,
+          AppDbContext db)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _externalCookieScheme = identityCookieOptions.Value.ExternalCookieAuthenticationScheme;
             _emailSender = emailSender;
-            _smsSender = smsSender;
             _logger = loggerFactory.CreateLogger<ManageController>();
+            _db = db;
         }
 
         //
@@ -51,6 +52,7 @@ namespace MiA_projekt.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.ChangeAddressViewModel ? "Your address has been changed."
                 : "";
 
             var user = await GetCurrentUserAsync();
@@ -64,7 +66,10 @@ namespace MiA_projekt.Controllers
                 PhoneNumber = await _userManager.GetPhoneNumberAsync(user),
                 TwoFactor = await _userManager.GetTwoFactorEnabledAsync(user),
                 Logins = await _userManager.GetLoginsAsync(user),
-                BrowserRemembered = await _signInManager.IsTwoFactorClientRememberedAsync(user)
+                BrowserRemembered = await _signInManager.IsTwoFactorClientRememberedAsync(user),
+                IsAdmin = await _userManager.IsInRoleAsync(user, "Admin"),
+                IsHost = await _userManager.IsInRoleAsync(user, "Host"),
+                IsModerator = await _userManager.IsInRoleAsync(user, "Mod")
             };
             return View(model);
         }
@@ -96,26 +101,26 @@ namespace MiA_projekt.Controllers
             return View();
         }
 
-        //
-        // POST: /Manage/AddPhoneNumber
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-            // Generate the token and send it
-            var user = await GetCurrentUserAsync();
-            if (user == null)
-            {
-                return View("Error");
-            }
-            var code = await _userManager.GenerateChangePhoneNumberTokenAsync(user, model.PhoneNumber);
-            await _smsSender.SendSmsAsync(model.PhoneNumber, "Your security code is: " + code);
-            return RedirectToAction(nameof(VerifyPhoneNumber), new { PhoneNumber = model.PhoneNumber });
-        }
+        ////
+        //// POST: /Manage/AddPhoneNumber
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(model);
+        //    }
+        //    // Generate the token and send it
+        //    var user = await GetCurrentUserAsync();
+        //    if (user == null)
+        //    {
+        //        return View("Error");
+        //    }
+        //    var code = await _userManager.GenerateChangePhoneNumberTokenAsync(user, model.PhoneNumber);
+        //    await _smsSender.SendSmsAsync(model.PhoneNumber, "Your security code is: " + code);
+        //    return RedirectToAction(nameof(VerifyPhoneNumber), new { PhoneNumber = model.PhoneNumber });
+        //}
 
         //
         // POST: /Manage/EnableTwoFactorAuthentication
@@ -242,6 +247,21 @@ namespace MiA_projekt.Controllers
             return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
         }
 
+        [HttpPost]
+        public async Task<IActionResult> ChangeAddress(ChangeAddressViewModel model)
+        {
+            string userId = _userManager.GetUserId(HttpContext.User);
+
+            AppUser user = _db.Users.Include(e => e.Address).First(u => u.Id == userId);
+            Address address = user.Address;
+            address.City = model.City;
+            address.CountryCode = model.CountryCode;
+            address.PostalCode = model.PostalCode;
+            address.Street = model.Street;
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
         //
         // GET: /Manage/SetPassword
         [HttpGet]
@@ -341,6 +361,57 @@ namespace MiA_projekt.Controllers
             return RedirectToAction(nameof(ManageLogins), new { Message = message });
         }
 
+        public IActionResult ChangeAddress()
+        {
+            return View();
+        }
+
+        //public async Task<IActionResult> AddApartment(AddApartmentVM model)
+        //{
+        //    //todog
+        //}
+
+        //public async Task<IActionResult> BecomeAhost(IndexViewModel model)
+        //{
+        //    //todog
+        //}
+
+
+        public IActionResult AddApartment()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddApartment(AddApartmentVM model)
+        {
+            if (!ModelState.IsValid)
+                return View("Error");
+
+            Address addr = _db.Addresses.Add(new Address
+            {
+                City = model.City,
+                CountryCode = model.CountryCode,
+                PostalCode = model.PostalCode,
+                Street = model.Street
+            }).Entity;
+            _db.SaveChanges();
+
+            _db.Apartments.Add(new Apartment
+            {
+                Addressid = addr.Id,
+                Description = model.Description,
+                From = model.From,
+                To = model.To,
+                GuestCount = model.GuestCount,
+                Image = model.Image,
+                Name = model.Name,
+                Price = model.Price
+            });
+
+            return RedirectToAction("Index");
+        }
+
         #region Helpers
 
         private void AddErrors(IdentityResult result)
@@ -360,7 +431,8 @@ namespace MiA_projekt.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
-            Error
+            Error,
+            ChangeAddressViewModel
         }
 
         private Task<AppUser> GetCurrentUserAsync()

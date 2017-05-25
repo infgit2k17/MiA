@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var today = DateTime.Today;
 }
-
 
 <div class="main-search" data-ride="carousel">
     <h2>Apartment reservation system</h2>
@@ -15,7 +15,7 @@
         </thead>
         <tbody>
             <tr>
-                <td colspan="3"><input class="sb-destination" /></td>
+                <td colspan="3"><input class="sb-destination" id="destin" required/></td>
             </tr>
         </tbody>
         <thead>
@@ -27,15 +27,16 @@
         </thead>
         <tbody>
             <tr>
-                <td><input type="text" id="departing"></td>
-                <td><input type="text" id="returning"></td>
-                <td><input type="text" id="count_picker"></td>
+                <td><input id="departing" type="date" min=@today required></td>
+                <td><input id="returning" type="date" required></td>
+                <td><input type="number" min="1" id="count_picker" required></td>
             </tr>
         </tbody>
     </table>
     <section class="contentButton">
         <div class="Search">
-            <a rel="nofollow" class="button" href="">Search</a>
+            <button id="btnSerch" class="button" onclick="uriaction()">Search</button>
+            <!-- <a rel="nofollow" class="button" id="btnSerch" href="@Url.Action("Search", "Home", new { Destination = "Poznan", Arrival = "2017/10/10", Departure= "2017/11/11", Guests= 5 })">Search</a>-->
         </div>
         <div class="Search">
             <a rel="nofollow" class="button" href="">Clear</a>

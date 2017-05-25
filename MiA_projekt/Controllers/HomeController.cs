@@ -1,21 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MiA_projekt.Data;
+using MiA_projekt.Manager;
+using MiA_projekt.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MiA_projekt.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ApartmentManager _manager;
+
+        public HomeController(AppDbContext db)
+        {
+            _manager = new ApartmentManager(db);
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Search()
+        public IActionResult Search(SearchViewModel vm)
         {
-            return View();
+            if (vm == null || !ModelState.IsValid)
+                return Error("Please specify search parameters.");
+
+            return View(_manager.FindApartments(vm));
         }
 
         public IActionResult About()
@@ -32,18 +41,14 @@ namespace MiA_projekt.Controllers
             return View();
         }
 
-        public IActionResult Error()
+        public IActionResult Error(string message = "")
         {
-            return View();
+            return View("Error", message);
         }
 
-        public IActionResult Description()
+        public IActionResult Description(int id)
         {
-            String[] tab = { "ala", "ola", "ela", "marysia" };
-            ViewData["Description"] = "Opis apartamentu";
-            ViewData["Comments"] = tab;
-
-            return View();
+            return View(_manager.GetAparmentDetails(id));
         }
     }
 }

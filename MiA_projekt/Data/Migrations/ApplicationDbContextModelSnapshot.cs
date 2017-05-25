@@ -13,7 +13,7 @@ namespace MiA_projekt.Data.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.1.1")
+                .HasAnnotation("ProductVersion", "1.1.2")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("MiA_projekt.Models.Address", b =>
@@ -33,7 +33,7 @@ namespace MiA_projekt.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(10);
 
-                    b.Property<string>("Stree")
+                    b.Property<string>("Street")
                         .IsRequired()
                         .HasMaxLength(20);
 
@@ -57,11 +57,17 @@ namespace MiA_projekt.Data.Migrations
 
                     b.Property<short>("GuestCount");
 
+                    b.Property<string>("Image");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(30);
 
                     b.Property<decimal>("Price");
+
+                    b.Property<int>("RatePoints");
+
+                    b.Property<int>("RatesCount");
 
                     b.Property<DateTime>("To");
 
@@ -136,6 +142,24 @@ namespace MiA_projekt.Data.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("MiA_projekt.Models.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ApartmentId");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApartmentId");
+
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("MiA_projekt.Models.Offer", b =>
@@ -284,6 +308,14 @@ namespace MiA_projekt.Data.Migrations
                     b.HasOne("MiA_projekt.Models.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MiA_projekt.Models.Image", b =>
+                {
+                    b.HasOne("MiA_projekt.Models.Apartment", "Apartment")
+                        .WithMany()
+                        .HasForeignKey("ApartmentId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

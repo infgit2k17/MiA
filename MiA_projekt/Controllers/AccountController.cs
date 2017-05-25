@@ -264,6 +264,15 @@ namespace MiA_projekt.Controllers
             return View();
         }
 
+        public IActionResult BecomeHost()
+        {
+            return View();
+        }
+
+        public IActionResult CreateOffer()
+        {
+            return View();
+        }
         #region Helpers
 
         private void AddErrors(IdentityResult result)

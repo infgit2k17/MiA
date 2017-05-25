@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MiA_projekt.Models
 {
-    public class Offer // co ze zdjęciami?
+    public class Offer
     {
         [Key]
         public int Id { get; set; }
@@ -17,7 +17,7 @@ namespace MiA_projekt.Models
         public AppUser Guest { get; set; }
 
         [Range(1, 1000)]
-        public int GuestCount { get; set; }
+        public int GuestCount { get; set; } // nie potrzebne
 
         public DateTime From { get; set; }
 

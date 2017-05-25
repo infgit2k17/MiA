@@ -33,11 +33,11 @@
                 {
                     <br />
                     <a asp-controller="Manage" asp-action="AddPhoneNumber" class="btn-bracketed">Change</a>
-                    <!--
-                       <form asp-controller="Manage" asp-action="RemovePhoneNumber" method="post">
+
+                    <form asp-controller="Manage" asp-action="RemovePhoneNumber" method="post">
                         [<button type="submit" class="btn-link">Remove</button>]
                     </form>
-                    -->
+
                 }
                 else
                 {
@@ -46,10 +46,10 @@
             </dd>
             @if (Model.IsHost)
             {
-                <dt>Becoma a host: </dt>
-                <dd>
-                    <a asp-controller="Manage" asp-action="ChangePassword" class="btn-bracketed">Change</a>
-                </dd>
+                @*<dt>Becoma a host: </dt>
+                    <dd>
+                        <a asp-controller="Manage" asp-action="ChangePassword" class="btn-bracketed">Change</a>
+                    </dd>*@
                 <dt>Add offer: </dt>
                 <dd>
                     <a asp-controller="Manage" asp-action="AddOffer" class="btn-bracketed">Add</a>
@@ -57,15 +57,18 @@
             }
             else
             {
-                <dt>Become a host: </dt>
-                <dd>
-                    <a asp-controller="Manage" class="btn-bracketed">Apply</a>
-                </dd>
+                @if (Model.Apply==false)
+                {
+                    <dt>Become a host: </dt>
+                    <dd>
+                        <a asp-controller="Manage" asp-action="BecomeAhost" class="btn-bracketed">Apply</a>
+                    </dd>
+                }
             }
-            <dt>Add offer: </dt>
-            <dd>
-                <a asp-controller="Manage" asp-action="AddOffer" class="btn-bracketed">Add</a>
-            </dd>
+            @*<dt>Add offer: </dt>
+                <dd>
+                    <a asp-controller="Manage" asp-action="AddOffer" class="btn-bracketed">Add</a>
+                </dd>*@
         </dl>
     </div>
 </div>

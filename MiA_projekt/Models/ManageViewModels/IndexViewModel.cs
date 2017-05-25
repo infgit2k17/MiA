@@ -20,5 +20,7 @@ namespace MiA_projekt.Models.ManageViewModels
         public bool IsModerator { get; set; }
 
         public bool IsAdmin { get; set; }
+
+        public bool Apply { get; set; }
     }
 }

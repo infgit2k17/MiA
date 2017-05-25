@@ -365,6 +365,17 @@ namespace MiA_projekt.Controllers
             return View();
         }
 
+        //public async Task<IActionResult> AddOffer(AddOfferViewModel model)
+        //{
+        //    //todog
+        //}
+
+        //public async Task<IActionResult> BecomeAhost(IndexViewModel model)
+        //{
+        //    //todog
+        //}
+
+
         public IActionResult AddOffer()
         {
             return View();

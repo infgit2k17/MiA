@@ -7,6 +7,9 @@
     </div>
 </div>
 -->
+@{ 
+    var today = DateTime.Today;
+}
 
 @model IEnumerable<ApartmentVM>
 
@@ -77,7 +80,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input id="departing" type="date" min=@DateTime.Today></td>
+                        <td><input id="departing" type="date" min=@today required></td>
                     </tr>
                 </tbody>
                 <thead>
@@ -87,7 +90,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input id="returning" type="date" min=@DateTime.Today></td>
+                        <td><input id="returning" type="date" min=@today required></td>
                     </tr>
                 </tbody>
                 <thead>

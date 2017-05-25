@@ -2,6 +2,7 @@
 
 @{
     var x = Model.RatingStars * 20;
+    var today = DateTime.Today;
 }
 
 <div class="container body-content">
@@ -94,7 +95,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input id="departing" type="date" min=@DateTime.Today></td>
+                        <td><input id="departing" type="date" min = @today required></td>
                     </tr>
                 </tbody>
                 <thead>
@@ -104,7 +105,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input id="returning" type="date"></td>
+                        <td><input id="returning" type="date" min = @today required></td>
                     </tr>
                 </tbody>
                 <thead>

@@ -1,0 +1,260 @@
+@{
+    ViewData["Title"] = "EditorWithTable";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wrapper wrapper-content">
+    @if (ViewBag.Editor == null || ViewBag.Editor)
+    {
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Editor</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div id="content" class="ibox-content">
+                        <fieldset class="form-horizontal">
+                            @ViewBag.EditorForm.Render()
+                            <div class="text-right">
+                                <button id="clearBtn" onclick="clearForm()" class="btn btn-primary">Clear form</button>
+                                <button id="mainBtn" onclick="processData()" class="btn btn-primary">Add new</button>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Data</h5>
+                    <div class="ibox-tools">
+                        <a onclick="reloadData()" aria-expanded="false">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content table-responsive">
+                    @ViewBag.DataTable.Render()
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles
+{
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.15/css/dataTables.bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" />
+}
+
+@section Scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.15/js/jquery.dataTables.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.15/js/dataTables.bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+    
+    @ViewBag.DataTable.RenderScipt()
+
+    @if (ViewBag.Editor == null || ViewBag.Editor)
+    {
+        <script>
+            var isNew = true;
+            var isBusy = false;
+
+            $(function () {
+                $("#id").change(function () {
+                    if (this.value.length === 0)
+                        setIsNew(true);
+                    else
+                        setIsNew(false);
+                });
+
+                $(document).keypress(function (e) {
+                    if (e.which === 13 && !isSwalDisplayed() && !isBusy && !isFocusedOnTextArea())
+                        processData();
+                });
+            });
+
+            function isFocusedOnTextArea() {
+                return $("textarea, input[type=search]").is(':focus');
+            }
+
+            function isSwalDisplayed() {
+                return $(".sweet-alert.visible").length > 0;
+            }
+
+            function readData(id) {
+                $.ajax({
+                    url: "@ViewBag.ApiUrl" + id,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        if (isUnauthorized(data)) {
+                            toastr.error("Your session has expired. Please log in again.");
+                            return;
+                        }
+
+                        @ViewBag.EditorForm.RenderResults()
+
+                        setIsNew(false);
+                    },
+                    error: function () {
+                        toastr.error("Item with id = " + id + " not found!");
+                    }
+                });
+            }
+
+            function isUnauthorized(data)
+            {
+                if (data == null)
+                    return false;
+
+                return data.message === "Authorization has been denied for this request.";
+            }
+
+            function clearForm() {
+                $("#content input").each(function () {
+                    $(this).val('');
+                });
+
+                $("#content textarea").each(function () {
+                    $(this).val('');
+                });
+
+                setIsNew(true);
+            }
+
+            function setIsNew(value) {
+                isNew = value;
+
+                if (value)
+                    $("#mainBtn").html("Add new");
+                else
+                    $("#mainBtn").html("Update existing");
+            }
+
+            function setIsBusy(value) {
+                isBusy = value;
+
+                if (value) {
+                    $('#mainBtn').attr("disabled", true);
+                    $('#clearBtn').attr("disabled", true);
+                } else {
+                    $("#mainBtn").removeAttr("disabled");
+                    $("#clearBtn").removeAttr("disabled");
+                }
+            }
+
+            function processData() {
+                setIsBusy(true);
+
+                if (isNew)
+                    addNew();
+                else
+                    updateExisting();
+            }
+
+            function addNew() {
+                $.ajax({
+                    url: "@ViewBag.ApiUrl",
+                    method: "POST",
+                    data: getJson(),
+                    success: function (data) {
+                        if (isUnauthorized(data)) {
+                            toastr.error("Your session has expired. Please log in again.");
+                            setIsBusy(false);
+                            return;
+                        }
+
+                        toastr.success("New item has been added!");
+                        reloadData();
+                        clearForm();
+                        setIsBusy(false);
+                    },
+                    error: function (data) {
+                        displayErrors(data);
+                        setIsBusy(false);
+                    }
+                });
+            }
+
+            function displayErrors(data) {
+                if (data == null || data.responseText === "")
+                    return;
+
+                var json = JSON.parse(data.responseText);
+
+                if (json.message != null) {
+                    var errors;
+                    try {
+                        errors = JSON.parse(json.message);
+                    } catch (e) {
+                        toastr.error(json.message);
+                        return;
+                    }
+
+                    for (var i = errors.length - 1; i >= 0 ; i--)
+                        toastr.error(errors[i]);
+                }
+                else if (json.exceptionMessage != null)
+                    toastr.error(json.exceptionMessage);
+                else
+                    toastr.error("Unknown error occurred while processing the request.");
+            }
+
+            function updateExisting() {
+                var id = document.getElementById("id").value;
+
+                $.ajax({
+                    url: "@ViewBag.ApiUrl" + id,
+                    method: "PUT",
+                    data: getJson(),
+                    success: function (data) {
+                        if (isUnauthorized(data)) {
+                            toastr.error("Your session has expired. Please log in again.");
+                            setIsBusy(false);
+                            return;
+                        }
+
+                        toastr.success("Item has been updated!");
+                        reloadData();
+                        clearForm();
+                        setIsBusy(false);
+                    },
+                    error: function (data) {
+                        if (data != null && data.responseText !== "")
+                            toastr.error(JSON.parse((data).responseText).exceptionMessage);
+                        else
+                            toastr.error("Unknown error occurred while processing the request.");
+
+                        setIsBusy(false);
+                    }
+                });
+            }
+
+            function getJson() {
+                return {
+                    @ViewBag.EditorForm.RenderJsonData()
+                };
+            }
+        </script>
+    }
+
+    <script>
+        function reloadData() {
+            $('#datatable').DataTable().ajax.reload();
+        }
+    </script>
+}
+

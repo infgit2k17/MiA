@@ -63,7 +63,6 @@ function uriaction2() {
     window.location.href = 'Search?Destination=' + $("#destin").val() + '&Arrival=' + $("#departing").val() + '&Departure=' + $("#returning").val() + '&Guests=' + $("#count_picker").val();
 }
 
-
 //Odpoiwiedzialne za wyświetlanie modal
 var modal = document.getElementById('myModal');
 var btn = document.getElementById("myBtn");
@@ -79,5 +78,3 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 }
-
-

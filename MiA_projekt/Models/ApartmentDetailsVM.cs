@@ -16,6 +16,6 @@ namespace MiA_projekt.Models
 
         public decimal Price { get; set; }
 
-        //todog, model do komentarzy
+        public IEnumerable<CommentVM> Comments { get; set; }
     }
 }

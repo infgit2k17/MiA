@@ -41,7 +41,17 @@ namespace MiA_projekt.Manager
                 Price = a.Price,
                 RatingStars = CalculateRates(a.RatePoints, a.RatesCount),
                 Title = a.Name,
-                Description = a.Description
+                Description = a.Description,
+                Comments = _db.Comments.Where(i => i.ApartmentId == id).ToList().Select(ToComment)
+            };
+        }
+
+        private CommentVM ToComment(Comment vm)
+        {
+            return new CommentVM
+            {
+                AuthorName = vm.User.Name + " " + vm.User.Surname,
+                Comment = vm.Text
             };
         }
 

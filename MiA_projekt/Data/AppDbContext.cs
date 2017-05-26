@@ -15,6 +15,7 @@ namespace MiA_projekt.Data
         public DbSet<Image> Images { get; set; }
 
         public DbSet<HostRequest> HostRequests { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         { }

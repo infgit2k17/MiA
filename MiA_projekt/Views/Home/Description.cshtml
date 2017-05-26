@@ -83,11 +83,6 @@
                     <p>@Model.Description</p>
                 </div>
                 <div class="hotel-description-div">
-                    @*<h3>Comments</h3>
-                    <div class="commentfield">
-                        <h4>User name</h4>
-                        <p>dsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsa</p>
-                    </div>*@
 
                     @*<p>COMMENTS</p>
                         <fieldset class="comment">
@@ -101,6 +96,16 @@
 
 
                     <div class="w3-content">
+                        @*@foreach (var item in Model)
+                        {
+                            <div class="mySlides">
+                                <h3>Comments</h3>
+                                <div class="commentfield">
+                                    <h4>@Model</h4>
+                                    <p>@Model</p>
+                                </div>
+                            </div>
+                        }*@
                         <div class="mySlides">
                             <h3>Comments</h3>
                             <div class="commentfield">

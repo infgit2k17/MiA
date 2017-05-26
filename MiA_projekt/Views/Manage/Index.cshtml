@@ -57,12 +57,12 @@
             else
             {
                 @if (Model.Apply==false)
-                {
-                    <dt>Become a host: </dt>
-                    <dd>
-                        <a asp-controller="Manage" asp-action="BecomeAhost" class="btn-bracketed">Apply</a>
-                    </dd>
-                }
+                 {
+                     <dt>Become a host: </dt>
+                     <dd>
+                         <a asp-controller="Manage" asp-action="BecomeAhost" class="btn-bracketed">Apply</a>
+                     </dd>
+                 }
             }
             @*<dt>Add offer: </dt>
                 <dd>
@@ -70,4 +70,24 @@
                 </dd>*@
         </dl>
     </div>
+    
+    @if (Model.IsAdmin)
+    {
+        <div class="hotel-description-div">
+            <dl class="dl-horizontal">
+                <dt>Users:</dt>
+                <dd>
+                    <a asp-controller="Admin" asp-action="Users" class="btn-bracketed">Manage</a>
+                </dd>
+                <dt>Adresses:</dt>
+                <dd>
+                    <a asp-controller="Manage" asp-action="SetPassword" class="btn-bracketed">Manage</a>
+                </dd>
+                <dt>Apartments:</dt>
+                <dd>
+                    <a asp-controller="Manage" asp-action="SetPassword" class="btn-bracketed">Manage</a>
+                </dd>
+            </dl>
+        </div>
+    }
 </div>

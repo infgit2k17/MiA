@@ -3,12 +3,14 @@ using MiA_projekt.Models;
 using MiA_projekt.Models.ManageViewModels;
 using MiA_projekt.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -370,16 +372,36 @@ namespace MiA_projekt.Controllers
             return View();
         }
 
-        //public async Task<IActionResult> AddApartment(AddApartmentVM model)
-        //{
-        //    //todog
-        //}
+        
+        public IActionResult BecomeAhost()
+        {
+            return View("Error"); // nie ma widoku więc zwracam error
+        }
 
-        //public async Task<IActionResult> BecomeAhost(IndexViewModel model)
-        //{
-        //    //todog
-        //}
+        [HttpPost]
+        public async Task<IActionResult> BecomeAhost(IFormFile file)
+        {
+            // full path to file in temp location
+            var filePath = Path.GetTempFileName();
 
+            if (file.Length > 0)
+            {
+                using (Stream stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+            }
+
+            string userId = _userManager.GetUserId(HttpContext.User);
+
+            _db.HostRequests.Add(new HostRequest
+            {
+                UserId = userId,
+                Date = DateTime.Now
+            });
+
+            return Ok();
+        }
 
         public IActionResult AddApartment()
         {

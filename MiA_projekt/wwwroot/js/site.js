@@ -55,6 +55,21 @@
 //    });
 
 
+var slideIndex = 0;
+carousel();
+
+function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > x.length) { slideIndex = 1 }
+    x[slideIndex - 1].style.display = "block";
+    setTimeout(carousel, 10000);
+}
+
 function uriaction() {
     window.location.href = 'Home/Search?Destination=' + $("#destin").val() + '&Arrival=' + $("#departing").val() + '&Departure=' + $("#returning").val() + '&Guests=' + $("#count_picker").val();
 }
@@ -62,6 +77,7 @@ function uriaction() {
 function uriaction2() {
     window.location.href = 'Search?Destination=' + $("#destin").val() + '&Arrival=' + $("#departing").val() + '&Departure=' + $("#returning").val() + '&Guests=' + $("#count_picker").val();
 }
+
 
 //Odpoiwiedzialne za wyświetlanie modal
 var modal = document.getElementById('myModal');
@@ -78,3 +94,4 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 }
+

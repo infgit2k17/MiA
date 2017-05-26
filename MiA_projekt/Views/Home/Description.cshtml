@@ -52,22 +52,39 @@
                 </a>
             </div>
             <div class="hotel-description">
-                <p style="text-align:center; color:snow; font-size:20px">RATING</p>
-                <div class="star-ratings-css">
-                    <div class="star-ratings-css-top" style="width: @x%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-                    <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                <div class="hotel-description-div">
+                    <div class="Search_offer" style="height:150px; margin-bottom: 15px;width: 70%">
+                        <div class="left_img">
+                            <h4 style="font-weight: bold;color:black; text-align: center; padding-top: 40px;">PRICE:</h4>
+                            <h5 style="color:black">@Model.Price $</h5>
+                        </div>
+                        <div class="right_desc" style="width:70%">
+                            <div class="SearchOffleft" style="border-left:1px solid #000; height:120px">
+                                <h4 style="font-weight: bold">RATING</h4>
+                                <div class="star-ratings-css">
+                                    <div class="star-ratings-css-top" style="width: @x%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                                    <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                                </div>
+                                <h4 style="margin-top: 20px">@Model.RatingStars.ToString("F")</h4>
+                            </div>
+                            <div class="SearchOffleft" style="border-left:1px solid #000; height:120px; padding-top: 30px;">
+                                <section class="contentButton">
+                                    <div class="Searchv2" style="margin:0 auto">
+                                        <button id="btnCheck" class="buttonv2" href="">Order</button>
+                                    </div>
+                                    @*@Html.ActionLink("Description", "Description", new { id = aparment.id }); *@
+                                </section>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="hotel-description-div">
-                    <p>Description</p>
+                    <h3>Description</h3>
                     <p>@Model.Description</p>
                 </div>
-                <form asp-action="Add Offer">
-                    <div class="hotel-description-div">
-                        <div class="commentfield">
-                            <p>dsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsa</p>
-                        </div>
+                <div class="hotel-description-div">
 
-                        @*<p>COMMENTS</p>
+                    @*<p>COMMENTS</p>
                         <fieldset class="comment">
                             <textarea cols="80" rows="4" name="tresc" class="expanded placeholder" placeholder="Leave a comment"></textarea>
                         </fieldset>
@@ -76,8 +93,37 @@
                                 <button type="submit" class="button">Submit</button>
                             </div>
                         </section>*@
+
+
+                    <div class="w3-content">
+                        @*@foreach (var item in Model)
+                        {
+                            <div class="mySlides">
+                                <h3>Comments</h3>
+                                <div class="commentfield">
+                                    <h4>@Model</h4>
+                                    <p>@Model</p>
+                                </div>
+                            </div>
+                        }*@
+                        <div class="mySlides">
+                            <h3>Comments</h3>
+                            <div class="commentfield">
+                                <h4>User name</h4>
+                                <p>dsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsa</p>
+                            </div>
+                        </div>
+
+                        <div class="mySlides">
+                            <h3>Comments</h3>
+                            <div class="commentfield">
+                                <h4>User name</h4>
+                                <p>dsad as dasdsadsad as dzxzxzxasdsadsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsa</p>
+                            </div>
+                        </div>
                     </div>
-                </form>
+
+                </div>
             </div>
         </div>
         <div id="left" class="rlt-left">
@@ -99,7 +145,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input id="departing" type="date" min = @today required></td>
+                        <td><input id="departing" type="date" min=@today required></td>
                     </tr>
                 </tbody>
                 <thead>
@@ -109,7 +155,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input id="returning" type="date" min = @today required></td>
+                        <td><input id="returning" type="date" min=@today required></td>
                     </tr>
                 </tbody>
                 <thead>

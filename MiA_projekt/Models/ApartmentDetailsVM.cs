@@ -15,5 +15,7 @@ namespace MiA_projekt.Models
         public double RatingStars { get; set; }
 
         public decimal Price { get; set; }
+
+        //todog, model do komentarzy
     }
 }

@@ -55,8 +55,6 @@
                 <div class="hotel-description-div">
                     <div class="Search_offer" style="height:150px; margin-bottom: 15px;width: 70%">
                         <div class="left_img">
-                            @*<h4 style="font-weight: bold; color:black; text-align: center">GUESTS:</h4>
-                            <h5 style="color:black">@Model.Guests</h5>*@
                             <h4 style="font-weight: bold;color:black; text-align: center; padding-top: 40px;">PRICE:</h4>
                             <h5 style="color:black">@Model.Price $</h5>
                         </div>
@@ -79,28 +77,17 @@
                             </div>
                         </div>
                     </div>
-                    @*<p style="text-align:center; color:snow; font-size:20px">RATING</p>
-                    <div class="star-ratings-css">
-                        <div class="star-ratings-css-top" style="width: @x%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-                        <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-                    </div>*@
                 </div>
                 <div class="hotel-description-div">
-                    <p>Description</p>
+                    <h3>Description</h3>
                     <p>@Model.Description</p>
                 </div>
                 <div class="hotel-description-div">
-                    <h3>COMMENTS</h3>
+                    @*<h3>Comments</h3>
                     <div class="commentfield">
                         <h4>User name</h4>
                         <p>dsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsa</p>
-                        <p>Liczba gwiazdek danych przez użytkownika?????</p>
-                    </div>
-                    <div class="commentfield">
-                        <h4>User name</h4>
-                        <p>dsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsa</p>
-                        <p>Liczba gwiazdek danych przez użytkownika?????</p>
-                    </div>
+                    </div>*@
 
                     @*<p>COMMENTS</p>
                         <fieldset class="comment">
@@ -112,14 +99,25 @@
                             </div>
                         </section>*@
 
-                    @*@foreach (var details in Model.Images)
-                        {
+
+                    <div class="w3-content">
+                        <div class="mySlides">
+                            <h3>Comments</h3>
                             <div class="commentfield">
-                                <h4></h4>
+                                <h4>User name</h4>
                                 <p>dsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsa</p>
-                                <p>Liczba gwiazdek danych przez użytkownika?????</p>
                             </div>
-                        }*@
+                        </div>
+
+                        <div class="mySlides">
+                            <h3>Comments</h3>
+                            <div class="commentfield">
+                                <h4>User name</h4>
+                                <p>dsad as dasdsadsad as dzxzxzxasdsadsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsadsad as dasdsa</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

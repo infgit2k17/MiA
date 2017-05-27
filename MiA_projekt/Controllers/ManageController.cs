@@ -425,7 +425,7 @@ namespace MiA_projekt.Controllers
 
             _db.Apartments.Add(new Apartment
             {
-                Addressid = addr.Id,
+                AddressId = addr.Id,
                 Description = model.Description,
                 From = model.From,
                 To = model.To,

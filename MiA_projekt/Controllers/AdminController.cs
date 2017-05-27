@@ -17,6 +17,16 @@ namespace MiA_projekt.Controllers
             return EditorWithTable<AddressDto>("Addresses", "addresses");
         }
 
+        public ViewResult Apartments()
+        {
+            return EditorWithTable<ApartmentDto>("Apartments", "apartments");
+        }
+
+        public ViewResult Comments()
+        {
+            return EditorWithTable<CommentDto>("Comments", "comments");
+        }
+
         private ViewResult EditorWithTable<T>(string title, string apiActionName) where T : class
         {
             ViewData["Title"] = title;

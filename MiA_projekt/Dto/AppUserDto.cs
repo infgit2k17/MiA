@@ -13,11 +13,11 @@ namespace MiA_projekt.Dto
         [EmailAddress]
         public string Email { get; set; }
 
-        [StringLength(maximumLength: 2)]
+        [StringLength(maximumLength: 20)]
         [Required]
         public string Name { get; set; }
 
-        [StringLength(maximumLength: 2)]
+        [StringLength(maximumLength: 20)]
         [Required]
         public string Surname { get; set; }
 

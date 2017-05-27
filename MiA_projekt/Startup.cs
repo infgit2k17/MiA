@@ -1,4 +1,5 @@
-﻿using MiA_projekt.Data;
+﻿using AutoMapper;
+using MiA_projekt.Data;
 using MiA_projekt.Models;
 using MiA_projekt.Services;
 using Microsoft.AspNetCore.Builder;
@@ -50,6 +51,7 @@ namespace MiA_projekt
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+            services.AddAutoMapper();
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();

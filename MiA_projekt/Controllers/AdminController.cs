@@ -7,10 +7,14 @@ namespace MiA_projekt.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
-        // GET: Admin/Users
         public ViewResult Users()
         {
             return EditorWithTable<AppUserDto>("Users", "users");
+        }
+
+        public ViewResult Addresses()
+        {
+            return EditorWithTable<AddressDto>("Addresses", "addresses");
         }
 
         private ViewResult EditorWithTable<T>(string title, string apiActionName) where T : class

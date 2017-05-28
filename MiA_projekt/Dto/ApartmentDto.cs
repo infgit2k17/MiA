@@ -1,16 +1,14 @@
-﻿using System;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace MiA_projekt.Models
+namespace MiA_projekt.Dto
 {
-    public class Apartment
+    public class ApartmentDto
     {
-        [Key]
+        [OnClick("readData(\" + item.id + \")", "item.id")]
         public int Id { get; set; }
 
         public string HostId { get; set; }
-
-        public AppUser Host { get; set; }
 
         [Required]
         [StringLength(maximumLength: 30, MinimumLength = 5)]
@@ -20,9 +18,8 @@ namespace MiA_projekt.Models
         [StringLength(maximumLength: 500)]
         public string Description { get; set; }
 
+        [DisplayName("Address Id")]
         public int AddressId { get; set; }
-
-        public Address Address { get; set; }
 
         [Range(1, 10000)]
         public decimal Price { get; set; }
@@ -30,14 +27,17 @@ namespace MiA_projekt.Models
         public string Image { get; set; }
 
         [Range(1, 1000)]
+        [DisplayName("Guests")]
         public short GuestCount { get; set; }
 
-        public DateTime From { get; set; }
+        public string From { get; set; }
 
-        public DateTime To { get; set; }
+        public string To { get; set; }
 
+        [DisplayName("Rate points")]
         public int RatePoints { get; set; }
 
+        [DisplayName("Rates count")]
         public int RatesCount { get; set; }
     }
 }

@@ -408,6 +408,11 @@ namespace MiA_projekt.Controllers
             return View();
         }
 
+        public IActionResult MyOffer()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult AddApartment(AddApartmentVM model)
         {

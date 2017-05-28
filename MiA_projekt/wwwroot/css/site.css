@@ -391,6 +391,7 @@ img {
     display: inline-block;
     padding: 0.5em 0.5em;
     margin-bottom: 2em;
+    border-radius: 5px;
 }
 
 .contentButton .buttonv2 {
@@ -400,9 +401,10 @@ img {
     line-height: 48px;
     padding: 0 20px;
     border: 1px solid #583626;
-    background: lightblue;
+    background: #4e793d;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 1px 3px rgba(255, 255, 255, 0.2);
     transition: all 0.1s;
+    border-radius: 5px;
 }
 
 .SearchOffleft h4{

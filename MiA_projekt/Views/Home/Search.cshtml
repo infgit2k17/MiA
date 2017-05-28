@@ -51,10 +51,9 @@
                             <h5>@aparment.Price $</h5>
                             <section class="contentButton">
                                 <div class="Searchv2">
-                                    <button id="btnCheck" class="buttonv2" href="">@Html.ActionLink("Description", "Description", new { id = aparment.Id });</button>
+                                    @*<button id="btnCheck" class="buttonv2">@Html.ActionLink("Description", "Description", new { id = aparment.Id });</button>*@
+                                    <button id="btnCheck" class="buttonv2" onclick="window.location.href='@Url.Action("Description", "Home", new { id = aparment.Id })';return false;">Description</button>
                                 </div>
-                                @*@Html.ActionLink("Description", "Description", new { id = aparment.id }); *@
-
                             </section>
                         </div>
                     </div>

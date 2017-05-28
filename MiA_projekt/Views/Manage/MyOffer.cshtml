@@ -10,8 +10,26 @@
         <hr />
         <div class="hotel-description-div">
             <dl class="dl-horizontal">
-                <dt>Password:</dt>
-
+                @foreach (var aparment in Model)
+                {
+                    <h3>@aparment.Name</h3>
+                    <dt>Description: </dt>
+                    <dd style="color:white">@aparment.Description</dd>
+                    <dt>Address: </dt>
+                    <dd style="color:white">@aparment.Address</dd>
+                    <dt>Price: </dt>
+                    <dd style="color:white">@aparment.Price</dd>
+                    <dt>Guest Count: </dt>
+                    <dd style="color:white">@aparment.GuestCount</dd>
+                    <dt>Date: </dt>
+                    <dd style="color:white">From: @aparment.From    To: @aparment.To</dd>
+                    <section class="contentButton">
+                    <div class="Search">
+                        <button id="btnCheck" class="buttonv2" onclick="window.location.href='@Url.Action("EditApp", "Manage", new { id = aparment.Id })';return false;">Edit</button>
+                    </div>
+                    </section>
+                    <br />
+               }
             </dl>
         </div>
 </div>

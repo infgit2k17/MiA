@@ -417,6 +417,7 @@ namespace MiA_projekt.Controllers
             string userId = _userManager.GetUserId(HttpContext.User);
             var apartments = _db.Apartments
                                 .Where(i => i.HostId == userId)
+                                .Include(i => i.Address)
                                 .Select(_mapper.Map<Apartment, MyOfferVM>)
                                 .AsEnumerable();
 

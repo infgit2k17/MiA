@@ -11,20 +11,23 @@
             <dl class="dl-horizontal">
                 @foreach (var aparment in Model)
                 {
-                    <h3>@aparment.Name</h3>
-                    <dt>Description: </dt>
-                    <dd style="color:white">@aparment.Description</dd>
-                    <dt>Address: </dt>
-                    <dd style="color:white">@aparment.Street @aparment.City @aparment.PostalCode</dd>
-                    <dt>Price: </dt>
-                    <dd style="color:white">@aparment.Price</dd>
-                    <dt>Guest Count: </dt>
-                    <dd style="color:white">@aparment.GuestCount</dd>
-                    <dt>Date: </dt>
-                    <dd style="color:white">From: @aparment.From    To: @aparment.To</dd>
-                    <button id="clearBtn" class="btn btn-primary" style="margin-left:150px">Edit</button>
-                    <button id="clearBtn" class="btn btn-primary" style="margin-left:10px">Remove</button>
-                    <br />
+                    <div data-id="@aparment.Id">
+                        <h3>@aparment.Name</h3>
+                        <dt>Description: </dt>
+                        <dd style="color:white">@aparment.Description</dd>
+                        <dt>Address: </dt>
+                        <dd style="color:white">@aparment.Street @aparment.City @aparment.PostalCode</dd>
+                        <dt>Price: </dt>
+                        <dd style="color:white">@aparment.Price $</dd>
+                        <dt>Guest Count: </dt>
+                        <dd style="color:white">@aparment.GuestCount</dd>
+                        <dt>Date: </dt>
+                        <dd style="color:white">From: @aparment.From    To: @aparment.To</dd>
+                        <button id="clearBtn" class="btn btn-primary" style="margin-left:180px; margin-top:10px">Edit</button>
+                        <button id="clearBtn" class="btn btn-primary" style="margin-left:10px; margin-top:10px">Remove</button>
+                        <br />
+                        <hr />
+                    </div>
                }
             </dl>
         </div>

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MiA_projekt.Controllers.Api
 {
     [Produces("application/json")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Mod")]
     public class ApartmentsController : ApiController
     {
         public ApartmentsController(AppDbContext db, IMapper mapper) : base(db, mapper)

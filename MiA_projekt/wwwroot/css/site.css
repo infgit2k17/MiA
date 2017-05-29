@@ -118,12 +118,12 @@ tr {
 
 th {
     /*background: steelblue;*/
-    background: #795548;
+    background: #337ab7;
     width: 25%;
     font-weight: lighter;
     text-shadow: 0 1px 0 #44291d;
     color: white;
-    border: 1px solid #161719;
+    border: 1px solid #2e6da4;
     box-shadow: inset 0px 1px 2px #44291d;
     transition: all 0.2s;
     text-align: center;
@@ -156,8 +156,8 @@ th {
         line-height: 48px;
         padding: 0 20px;
         border-radius: 24px;
-        border: 1px solid #583626;
-        background: #795548;
+        border: 1px solid #2e6da4;
+        background: #337ab7;
         box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 1px 3px rgba(255, 255, 255, 0.2);
         transition: all 0.1s;
     }

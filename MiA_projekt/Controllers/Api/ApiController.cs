@@ -10,8 +10,8 @@ namespace MiA_projekt.Controllers.Api
 {
     public abstract class ApiController : Controller
     {
-        private AppDbContext _db;
-        private readonly IMapper _mapper;
+        protected AppDbContext _db;
+        protected readonly IMapper _mapper;
 
         protected ApiController(AppDbContext db, IMapper mapper)
         {

@@ -2,6 +2,7 @@
 using MiA_projekt.Dto;
 using MiA_projekt.Models;
 using MiA_projekt.Models.AccountViewModels;
+using MiA_projekt.Models.ManageViewModels;
 using System;
 
 namespace MiA_projekt
@@ -25,6 +26,13 @@ namespace MiA_projekt
                 .ForMember(dest => dest.To, opt => opt.MapFrom(src => src.To.ToString("d")));
 
             CreateMap<Apartment, MyOfferVM>()
+                .ForMember(dest => dest.Street, opt => opt.MapFrom(src => src.Address.Street))
+                .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.Address.City))
+                .ForMember(dest => dest.PostalCode, opt => opt.MapFrom(src => src.Address.PostalCode))
+                .ForMember(dest => dest.From, opt => opt.MapFrom(src => src.From.ToString("d")))
+                .ForMember(dest => dest.To, opt => opt.MapFrom(src => src.To.ToString("d")));
+
+            CreateMap<Apartment, EditOfferVM>()
                 .ForMember(dest => dest.Street, opt => opt.MapFrom(src => src.Address.Street))
                 .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.Address.City))
                 .ForMember(dest => dest.PostalCode, opt => opt.MapFrom(src => src.Address.PostalCode))

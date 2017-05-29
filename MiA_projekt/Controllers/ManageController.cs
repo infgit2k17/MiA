@@ -284,23 +284,34 @@ namespace MiA_projekt.Controllers
         {
             var offer = _db.Apartments.Include(i => i.Address).FirstOrDefault(i => i.Id == id);
 
-            return View(offer);
+            if (offer == null)
+                return NotFound();
+
+            string userId = _userManager.GetUserId(HttpContext.User);
+            if (offer.HostId != userId)
+                return BadRequest();
+
+            return View(_mapper.Map<Apartment, EditOfferVM>(offer));
         }
 
         [HttpPost]
-        public IActionResult EditOffer(MyOfferVM vm)
+        public IActionResult EditOffer(EditOfferVM vm)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Invalid model");
 
-            var itemInDb = _db.Apartments.Include(i => i.Address).FirstOrDefault(i => i.Id == vm.Id);
+            var offer = _db.Apartments.Include(i => i.Address).FirstOrDefault(i => i.Id == vm.Id);
 
-            if (itemInDb == null)
+            if (offer == null)
                 return NotFound();
 
-            itemInDb.Address.City = vm.City;
-            itemInDb.Address.PostalCode = vm.PostalCode;
-            itemInDb.Address.Street = vm.Street;
+            string userId = _userManager.GetUserId(HttpContext.User);
+            if (offer.HostId != userId)
+                return BadRequest();
+
+            offer.Address.City = vm.City;
+            offer.Address.PostalCode = vm.PostalCode;
+            offer.Address.Street = vm.Street;
 
             _db.SaveChanges();
 

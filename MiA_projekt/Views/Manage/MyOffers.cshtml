@@ -55,11 +55,11 @@
                     function (isConfirm) {
                         if (isConfirm) {
                             $.ajax({
-                                url: '/api/apartments/' + button.attr("data-id"),
+                                url: '/api/apartments-user/' + button.attr("data-id"),
                                 type: 'DELETE',
                                 contentType: 'application/json; charset=utf-8',
                                 success: function () {
-                                    var tmp = $("div[data-id=" + id);
+                                    var tmp = $("div[data-id=" + id + "]");
                                     tmp.remove();
                                     toastr.success("Offer has been removed");
                                     table.ajax.reload();

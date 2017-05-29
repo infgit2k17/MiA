@@ -1,0 +1,4 @@
+okno EditView: wartoœci w oknach na start
+okno EditView, BecomeaHost, AddAparment: upload zdjêci
+Nowe okno MyOrder: komentarz, ocena + potwierdzenie zamówienia
+okno Search: sortowanie okien 

@@ -14,7 +14,7 @@
             <div class="form-group">
                 <label asp-for="Name" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
-                    <input asp-for="Name" class="form-control" value="@Model.Name"/>
+                    <input value="@Model.Name" asp-for="Name" class="form-control" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                 <label asp-for="Description" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
                     <fieldset class="comment commentv2">
-                        <textarea asp-for="Description" cols="80" rows="4" name="tresc" class="expanded placeholder" placeholder="Description" value="@Model.Description"></textarea>
+                        <textarea asp-for="Description" cols="80" rows="4" name="tresc" class="expanded placeholder" placeholder="@Model.Description" value="@Model.Description"></textarea>
                     </fieldset>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
@@ -355,7 +355,7 @@
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 
-    <script>
+    @*<script>
         $("div.col-md-10 select").val("@Model.CountryCode");
-    </script>
+    </script>*@
 }

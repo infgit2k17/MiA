@@ -1,4 +1,4 @@
-﻿@model IndexViewModel 
+﻿@model IndexViewModel
 @{
     ViewData["Title"] = "Manage your account";
 }
@@ -36,8 +36,8 @@
                     <a asp-controller="Manage" asp-action="AddPhoneNumber" class="btn-bracketed">Change</a>
 
                     @*<form asp-controller="Manage" asp-action="RemovePhoneNumber" method="post">
-                        [<button type="submit" class="btn-link">Remove</button>]
-                    </form>*@
+                            [<button type="submit" class="btn-link">Remove</button>]
+                        </form>*@
                 }
                 else
                 {
@@ -46,32 +46,32 @@
             </dd>
             @if (Model.IsHost)
             {
-                @*<dt>Becoma a host: </dt>
-                    <dd>
-                        <a asp-controller="Manage" asp-action="ChangePassword" class="btn-bracketed">Change</a>
-                    </dd>*@
                 <dt>Add offer: </dt>
                 <dd>
                     <a asp-controller="Manage" asp-action="AddApartment" class="btn-bracketed">Add</a>
                 </dd>
-            }
-            else
-            {
-                @if (Model.Apply==false)
-                 {
-                     <dt>Become a host: </dt>
-                     <dd>
-                         <a asp-controller="Manage" asp-action="BecomeAhost" class="btn-bracketed">Apply</a>
-                     </dd>
-                 }
-            }
-            <dt>My offers: </dt>
+                <dt>My offers: </dt>
                 <dd>
                     <a asp-controller="Manage" asp-action="MyOffers" class="btn-bracketed">Check</a>
                 </dd>
+            }
+            else
+            {
+                @if (Model.Apply == false)
+                {
+                    <dt>Become a host: </dt>
+                    <dd>
+                        <a asp-controller="Manage" asp-action="BecomeAhost" class="btn-bracketed">Apply</a>
+                    </dd>
+                }
+            }
+            <dt>My offers: </dt>
+            <dd>
+                <a asp-controller="Manage" asp-action="MyOffers" class="btn-bracketed">Check</a>
+            </dd>
         </dl>
     </div>
-    
+
     @if (Model.IsAdmin)
     {
         <div class="hotel-description-div">
@@ -97,3 +97,4 @@
         </div>
     }
 </div>
+

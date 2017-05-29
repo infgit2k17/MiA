@@ -425,12 +425,15 @@ namespace MiA_projekt.Controllers
         
         public IActionResult BecomeAhost()
         {
-            return View("Error"); // nie ma widoku więc zwracam error
+            return View(); // nie ma widoku więc zwracam error
         }
 
         [HttpPost]
         public async Task<IActionResult> BecomeAhost(IFormFile file)
         {
+            if (!ModelState.IsValid)
+                return View("Error");
+
             // full path to file in temp location
             var filePath = Path.GetTempFileName();
 

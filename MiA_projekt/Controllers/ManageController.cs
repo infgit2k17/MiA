@@ -228,6 +228,12 @@ namespace MiA_projekt.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult EditOffer()
+        {
+            return View();
+        }
+
         //
         // POST: /Manage/ChangePassword
         [HttpPost]

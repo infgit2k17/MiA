@@ -20,6 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot/images\bg — kopia.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="wwwroot\js\enlarge.js" />
   </ItemGroup>
   <ItemGroup>

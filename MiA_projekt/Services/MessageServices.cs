@@ -1,6 +1,5 @@
 ﻿using MailKit.Net.Smtp;
 using MimeKit;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace MiA_projekt.Services
@@ -9,13 +8,6 @@ namespace MiA_projekt.Services
     {
         public async Task SendEmailAsync(string email, string subject, string message)
         {
-            #if DEBUG
-            if (!Directory.Exists(@"C:\emails"))
-                Directory.CreateDirectory(@"C:\emails");
-            File.WriteAllText(@"C:\emails\" + email + ".txt", message);
-            return;
-            #endif
-
             var emailMessage = new MimeMessage();
 
             emailMessage.From.Add(new MailboxAddress("Apartments", "noreply762912@gmail.com"));

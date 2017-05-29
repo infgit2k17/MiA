@@ -1,5 +1,7 @@
-﻿using MiA_projekt.Data;
+﻿using AutoMapper;
+using MiA_projekt.Data;
 using MiA_projekt.Models;
+using MiA_projekt.Models.AccountViewModels;
 using MiA_projekt.Models.ManageViewModels;
 using MiA_projekt.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -25,6 +27,7 @@ namespace MiA_projekt.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly AppDbContext _db;
+        private readonly IMapper _mapper;
 
         public ManageController(
           UserManager<AppUser> userManager,
@@ -32,7 +35,7 @@ namespace MiA_projekt.Controllers
           IOptions<IdentityCookieOptions> identityCookieOptions,
           IEmailSender emailSender,
           ILoggerFactory loggerFactory,
-          AppDbContext db)
+          AppDbContext db, IMapper mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -40,6 +43,7 @@ namespace MiA_projekt.Controllers
             _emailSender = emailSender;
             _logger = loggerFactory.CreateLogger<ManageController>();
             _db = db;
+            _mapper = mapper;
         }
 
         //
@@ -408,9 +412,15 @@ namespace MiA_projekt.Controllers
             return View();
         }
 
-        public IActionResult MyOffer()
+        public IActionResult MyOffers()
         {
-            return View();
+            string userId = _userManager.GetUserId(HttpContext.User);
+            var apartments = _db.Apartments
+                                .Where(i => i.HostId == userId)
+                                .Select(_mapper.Map<Apartment, MyOfferVM>)
+                                .AsEnumerable();
+
+            return View(apartments);
         }
 
         [HttpPost]

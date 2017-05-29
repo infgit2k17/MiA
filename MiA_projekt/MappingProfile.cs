@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MiA_projekt.Dto;
 using MiA_projekt.Models;
+using MiA_projekt.Models.AccountViewModels;
 using System;
 
 namespace MiA_projekt
@@ -27,6 +28,10 @@ namespace MiA_projekt
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.From, opt => opt.MapFrom(src => DateTime.Parse(src.From)))
                 .ForMember(dest => dest.To, opt => opt.MapFrom(src => DateTime.Parse(src.To)));
+
+            CreateMap<Apartment, MyOfferVM>()
+                .ForMember(dest => dest.From, opt => opt.MapFrom(src => src.From.ToString("d")))
+                .ForMember(dest => dest.To, opt => opt.MapFrom(src => src.To.ToString("d")));
 
             CreateMap<Comment, CommentDto>();
 

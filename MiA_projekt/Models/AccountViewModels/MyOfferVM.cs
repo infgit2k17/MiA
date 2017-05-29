@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MiA_projekt.Models.AccountViewModels
+﻿namespace MiA_projekt.Models.AccountViewModels
 {
     public class MyOfferVM
     {
@@ -20,10 +14,8 @@ namespace MiA_projekt.Models.AccountViewModels
 
         public short GuestCount { get; set; }
 
-        public DateTime From { get; set; }
+        public string From { get; set; }
 
-        public DateTime To { get; set; }
-
-
+        public string To { get; set; }
     }
 }

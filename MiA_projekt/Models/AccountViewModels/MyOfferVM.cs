@@ -8,8 +8,6 @@
 
         public string Description { get; set; }
 
-        //public Address Address { get; set; }
-
         public string Street { get; set; }
 
         public string City { get; set; }

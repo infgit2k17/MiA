@@ -420,7 +420,7 @@ namespace MiA_projekt.Controllers
         
         public IActionResult BecomeAhost()
         {
-            return View(); // nie ma widoku więc zwracam error
+            return View(); 
         }
 
         [HttpPost]

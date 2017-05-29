@@ -1,6 +1,8 @@
 ﻿@model EditOfferVM
 @{
-
+    var @q = Model.Price.ToString();
+    string @x = q.Replace(',', '.');
+    
 }
 
 <h2>Edit offer</h2>
@@ -30,7 +32,7 @@
             <div class="form-group">
                 <label asp-for="Price" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
-                    <input asp-for="Price" class="form-control" value="@Model.Price" type="number" step="0.01" min="0.01"/>
+                    <input asp-for="Price" class="form-control" value="@x" type="number" step="0.01" min="0.01"/>
                     <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
             </div>

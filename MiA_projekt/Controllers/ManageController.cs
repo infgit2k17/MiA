@@ -414,8 +414,12 @@ namespace MiA_projekt.Controllers
         public async Task<IActionResult> ChangeAddress()
         {
             var user = await GetCurrentUserAsync();
+            var addr = _db.Addresses.FirstOrDefault(i => i.Id == user.AddressId);
 
-            return View(_mapper.Map<Address, ChangeAddressViewModel>(user.Address));
+            if (addr == null)
+                return BadRequest();
+
+            return View(_mapper.Map<Address, ChangeAddressViewModel>(addr));
         }
         
         public IActionResult BecomeAhost()

@@ -23,7 +23,7 @@
                         <dd style="color:white">@aparment.GuestCount</dd>
                         <dt>Date: </dt>
                         <dd style="color:white">From: @aparment.From    To: @aparment.To</dd>
-                        <button id="clearBtn" class="btn btn-primary" style="margin-left:180px; margin-top:10px">Edit</button>
+                        <button id="clearBtn" class="btn btn-primary" style="margin-left:180px; margin-top:10px" onclick="window.location.href='@Url.Action("EditOffer", "Manage", new { id = aparment.Id })';return false;">Edit</button>
                         <button id="clearBtn" class="btn btn-primary" onclick="onBtnCl(@aparment.Id)" style="margin-left:10px; margin-top:10px">Remove</button>
                         <br />
                         <hr />

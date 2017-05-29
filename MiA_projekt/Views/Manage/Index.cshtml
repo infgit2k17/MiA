@@ -96,4 +96,29 @@
             </dl>
         </div>
     }
+    
+    @if (Model.IsModerator)
+    {
+        <div class="hotel-description-div">
+            <h3>Moderator settings</h3>
+            <dl class="dl-horizontal">
+                <dt>Users:</dt>
+                <dd>
+                    <a asp-controller="Admin" asp-action="Users" class="btn-bracketed">Manage</a>
+                </dd>
+                <dt>Adresses:</dt>
+                <dd>
+                    <a asp-controller="Admin" asp-action="Addresses" class="btn-bracketed">Manage</a>
+                </dd>
+                <dt>Apartments:</dt>
+                <dd>
+                    <a asp-controller="Admin" asp-action="Apartments" class="btn-bracketed">Manage</a>
+                </dd>
+                <dt>Comments:</dt>
+                <dd>
+                    <a asp-controller="Admin" asp-action="Comments" class="btn-bracketed">Manage</a>
+                </dd>
+            </dl>
+        </div>
+    }
 </div>

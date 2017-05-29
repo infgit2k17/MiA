@@ -1,15 +1,20 @@
 using MiA_projekt.Dto;
+using MiA_projekt.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace MiA_projekt.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Mod")]
     public class AdminController : Controller
     {
-        public ViewResult Users()
+        private readonly UserManager<AppUser> _userManager;
+
+        public AdminController(UserManager<AppUser> userManager)
         {
-            return EditorWithTable<AppUserDto>("Users", "users");
+            _userManager = userManager;
         }
 
         public ViewResult Addresses()
@@ -17,14 +22,22 @@ namespace MiA_projekt.Controllers
             return EditorWithTable<AddressDto>("Addresses", "addresses");
         }
 
-        public ViewResult Apartments()
+        public async Task<ViewResult> Apartments()
         {
+            await IsMod();
             return EditorWithTable<ApartmentDto>("Apartments", "apartments");
         }
 
-        public ViewResult Comments()
+        public async Task<ViewResult> Comments()
         {
+            await IsMod();
             return EditorWithTable<CommentDto>("Comments", "comments");
+        }
+
+        public async Task<ViewResult> Users()
+        {
+            await IsMod();
+            return EditorWithTable<AppUserDto>("Users", "users");
         }
 
         private ViewResult EditorWithTable<T>(string title, string apiActionName) where T : class
@@ -51,5 +64,12 @@ namespace MiA_projekt.Controllers
             return View("EditorWithTable");
         }
 
+        private async Task IsMod()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (await _userManager.IsInRoleAsync(user, "Mod"))
+                ViewBag.Editor = false;
+        }
     }
 }

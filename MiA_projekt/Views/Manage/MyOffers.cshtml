@@ -24,7 +24,7 @@
                         <dt>Date: </dt>
                         <dd style="color:white">From: @aparment.From    To: @aparment.To</dd>
                         <button id="clearBtn" class="btn btn-primary" style="margin-left:180px; margin-top:10px">Edit</button>
-                        <button id="clearBtn" class="btn btn-primary" onclick="onBtnCl()" data-id="@aparment.Id" style="margin-left:10px; margin-top:10px">Remove</button>
+                        <button id="clearBtn" class="btn btn-primary" onclick="onBtnCl(@aparment.Id)" style="margin-left:10px; margin-top:10px">Remove</button>
                         <br />
                         <hr />
                     </div>
@@ -40,9 +40,7 @@
 
     <script>
 
-            function onBtnCl() {
-                var button = $(this);
-                var id = button.attr("data-id");
+            function onBtnCl(id) {
                 swal({
                     title: "Confirmation required!",
                     text: "Are you sure you want to remove the offer?" /*+ button.attr("data-id") + "?"*/,
@@ -55,7 +53,7 @@
                     function (isConfirm) {
                         if (isConfirm) {
                             $.ajax({
-                                url: '/api/apartments-user/' + button.attr("data-id"),
+                                url: '/api/apartments-user/' + id,
                                 type: 'DELETE',
                                 contentType: 'application/json; charset=utf-8',
                                 success: function () {

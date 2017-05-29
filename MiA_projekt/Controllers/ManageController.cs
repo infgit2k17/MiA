@@ -228,12 +228,6 @@ namespace MiA_projekt.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult EditOffer()
-        {
-            return View();
-        }
-
         //
         // POST: /Manage/ChangePassword
         [HttpPost]
@@ -420,12 +414,8 @@ namespace MiA_projekt.Controllers
         public async Task<IActionResult> ChangeAddress()
         {
             var user = await GetCurrentUserAsync();
-            var addr = _db.Addresses.FirstOrDefault(i => i.Id == user.AddressId);
 
-            if (addr == null)
-                return NotFound();
-
-            return View(_mapper.Map<Address, ChangeAddressViewModel>(addr));
+            return View(_mapper.Map<Address, ChangeAddressViewModel>(user.Address));
         }
         
         public IActionResult BecomeAhost()

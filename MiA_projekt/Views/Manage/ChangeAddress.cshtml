@@ -21,21 +21,21 @@
             <div class="form-group">
                 <label asp-for="City" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
-                    <input asp-for="City" class="form-control" />
+                    <input asp-for="City" class="form-control" value="@Model.City"/>
                     <span asp-validation-for="City" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label asp-for="PostalCode" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
-                    <input asp-for="PostalCode" class="form-control" />
+                    <input asp-for="PostalCode" class="form-control" value="@Model.PostalCode"/>
                     <span asp-validation-for="PostalCode" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label asp-for="CountryCode" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
-                    <select asp-for="CountryCode" class="form-control">
+                    <select name="selValue" asp-for="CountryCode" class="form-control">
                         <option value="AF">Afghanistan</option>
                         <option value="AX">Åland Islands</option>
                         <option value="AL">Albania</option>
@@ -303,4 +303,12 @@
 
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+    <script>
+        $(document).ready(function () {
+            $('select[name=selValue]').val(@Model.CountryCode);
+        });
+
+    </script>
+
 }

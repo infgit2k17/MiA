@@ -56,9 +56,12 @@ namespace MiA_projekt.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                AppUser user = await _userManager.FindByEmailAsync(model.Email);
+
+                if (await IsEmailUnconfirmedAsync(user, model.Password))
+                    return View("ConfirmRequired");
+
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation(1, "User logged in.");
@@ -78,6 +81,13 @@ namespace MiA_projekt.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        private async Task<bool> IsEmailUnconfirmedAsync(AppUser user, string password)
+        {
+            return user != null
+                   && !await _userManager.IsEmailConfirmedAsync(user)
+                   && await _userManager.CheckPasswordAsync(user, password);
         }
 
         //
@@ -119,15 +129,14 @@ namespace MiA_projekt.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
-                    // Send an email with this link
-                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    //var callbackUrl = Url.Action(nameof(ConfirmEmail), "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-                    //await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
-                    //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackUrl = Url.Action(nameof(ConfirmEmail), "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                    await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
+                        $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+
+                    return View("ConfirmRequired");
                 }
                 AddErrors(result);
             }
@@ -265,11 +274,6 @@ namespace MiA_projekt.Controllers
         }
 
         public IActionResult BecomeHost()
-        {
-            return View();
-        }
-
-        public IActionResult CreateOffer()
         {
             return View();
         }

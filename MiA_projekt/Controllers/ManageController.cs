@@ -19,7 +19,8 @@ using System.Threading.Tasks;
 namespace MiA_projekt.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class 
+        ManageController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;

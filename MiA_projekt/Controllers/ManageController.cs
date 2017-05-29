@@ -417,11 +417,16 @@ namespace MiA_projekt.Controllers
             return RedirectToAction(nameof(ManageLogins), new { Message = message });
         }
 
-        public IActionResult ChangeAddress()
+        public async Task<IActionResult> ChangeAddress()
         {
-            return View();
-        }
+            var user = await GetCurrentUserAsync();
+            var addr = _db.Addresses.FirstOrDefault(i => i.Id == user.AddressId);
 
+            if (addr == null)
+                return NotFound();
+
+            return View(_mapper.Map<Address, ChangeAddressViewModel>(addr));
+        }
         
         public IActionResult BecomeAhost()
         {

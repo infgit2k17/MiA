@@ -21,6 +21,8 @@ namespace MiA_projekt
             CreateMap<AddressDto, Address>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
 
+            CreateMap<Address, ChangeAddressViewModel>();
+
             CreateMap<Apartment, ApartmentDto>()
                 .ForMember(dest => dest.From, opt => opt.MapFrom(src => src.From.ToString("d")))
                 .ForMember(dest => dest.To, opt => opt.MapFrom(src => src.To.ToString("d")));

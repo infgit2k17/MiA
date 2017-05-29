@@ -53,7 +53,7 @@ namespace MiA_projekt
         {
             string row =
                 "<div class=\"form-group\"><label class=\"col-sm-2 control-label\">" + ReadDisplayName(property) +
-                ":</label><div class=\"col-sm-6\">" + RenderInputForm(property) + "</div>" + RenderHelpBlock(property) + "</div>";
+                ":</label><div class=\"col-sm-6\">" + RenderInputForm(property) + "</div></div>";
 
             return row;
         }
@@ -91,19 +91,6 @@ namespace MiA_projekt
                 return displayName[0].DisplayName;
 
             return property.Name;
-        }
-
-        private string RenderHelpBlock(PropertyInfo property)
-        {
-            TypeCode code = Type.GetTypeCode(property.PropertyType);
-
-            if (code == TypeCode.Boolean)
-                return "<span class=\"help-block\">true/false</span>";
-
-            if (code == TypeCode.DateTime)
-                return "<span class=\"help-block\">mm/dd/yyyy hh:mm</span>";
-
-            return String.Empty;
         }
 
         private string GetType(PropertyInfo property)

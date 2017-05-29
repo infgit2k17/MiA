@@ -11,13 +11,6 @@ namespace MiA_projekt.Controllers.Api
         public ApartmentsUserController(AppDbContext db, IMapper mapper) : base(db, mapper)
         { }
 
-        [HttpPut]
-        [Route("api/apartments-user/{id}")]
-        public IActionResult Update(int id, ApartmentVM dto)
-        {
-            return UpdateItem<Apartment, ApartmentVM>(id, dto);
-        }
-
         [HttpDelete]
         [Route("api/apartments-user/{id}")]
         public IActionResult Remove(int id)

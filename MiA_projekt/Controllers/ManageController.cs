@@ -279,6 +279,34 @@ namespace MiA_projekt.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult EditOffer(int id)
+        {
+            var offer = _db.Apartments.Include(i => i.Address).FirstOrDefault(i => i.Id == id);
+
+            return View(offer);
+        }
+
+        [HttpPost]
+        public IActionResult EditOffer(MyOfferVM vm)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid model");
+
+            var itemInDb = _db.Apartments.Include(i => i.Address).FirstOrDefault(i => i.Id == vm.Id);
+
+            if (itemInDb == null)
+                return NotFound();
+
+            itemInDb.Address.City = vm.City;
+            itemInDb.Address.PostalCode = vm.PostalCode;
+            itemInDb.Address.Street = vm.Street;
+
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
         //
         // GET: /Manage/SetPassword
         [HttpGet]

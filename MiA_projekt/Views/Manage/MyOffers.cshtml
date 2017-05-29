@@ -11,21 +11,70 @@
             <dl class="dl-horizontal">
                 @foreach (var aparment in Model)
                 {
-                    <h3>@aparment.Name</h3>
-                    <dt>Description: </dt>
-                    <dd style="color:white">@aparment.Description</dd>
-                    <dt>Address: </dt>
-                    <dd style="color:white">@aparment.Street @aparment.City @aparment.PostalCode</dd>
-                    <dt>Price: </dt>
-                    <dd style="color:white">@aparment.Price</dd>
-                    <dt>Guest Count: </dt>
-                    <dd style="color:white">@aparment.GuestCount</dd>
-                    <dt>Date: </dt>
-                    <dd style="color:white">From: @aparment.From    To: @aparment.To</dd>
-                    <button id="clearBtn" class="btn btn-primary" style="margin-left:150px">Edit</button>
-                    <button id="clearBtn" class="btn btn-primary" style="margin-left:10px">Remove</button>
-                    <br />
+                    <div data-id="@aparment.Id">
+                        <h3>@aparment.Name</h3>
+                        <dt>Description: </dt>
+                        <dd style="color:white">@aparment.Description</dd>
+                        <dt>Address: </dt>
+                        <dd style="color:white">@aparment.Street, @aparment.City, @aparment.PostalCode</dd>
+                        <dt>Price: </dt>
+                        <dd style="color:white">@aparment.Price $</dd>
+                        <dt>Guest Count: </dt>
+                        <dd style="color:white">@aparment.GuestCount</dd>
+                        <dt>Date: </dt>
+                        <dd style="color:white">From: @aparment.From    To: @aparment.To</dd>
+                        <button id="clearBtn" class="btn btn-primary" style="margin-left:180px; margin-top:10px">Edit</button>
+                        <button id="clearBtn" class="btn btn-primary" onclick="onBtnCl()" data-id="@aparment.Id" style="margin-left:10px; margin-top:10px">Remove</button>
+                        <br />
+                        <hr />
+                    </div>
                }
             </dl>
         </div>
 </div>
+
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <script>
+
+            function onBtnCl() {
+                var button = $(this);
+                var id = button.attr("data-id");
+                swal({
+                    title: "Confirmation required!",
+                    text: "Are you sure you want to remove the offer?" /*+ button.attr("data-id") + "?"*/,
+                    //type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, remove it!",
+                    cancelButtonText: "No"
+                },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            $.ajax({
+                                url: '/api/apartments/' + button.attr("data-id"),
+                                type: 'DELETE',
+                                contentType: 'application/json; charset=utf-8',
+                                success: function () {
+                                    var tmp = $("div[data-id=" + id);
+                                    tmp.remove();
+                                    toastr.success("Offer has been removed");
+                                    table.ajax.reload();
+                                },
+                                error: function () {
+                                    toastr.error("Error removing offer");
+                                }
+                            });
+                        }
+                    })
+        }
+    </script>
+}
+
+@section Styles{
+    <link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css' />
+    <link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css' />
+}

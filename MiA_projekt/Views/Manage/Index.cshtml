@@ -10,6 +10,7 @@
     <h4>Change your account settings</h4>
     <hr />
     <div class="hotel-description-div">
+        <h3>User settings</h3>
         <dl class="dl-horizontal">
             <dt>Password:</dt>
             <dd>
@@ -64,7 +65,7 @@
                      </dd>
                  }
             }
-            <dt>Check offer: </dt>
+            <dt>My offers: </dt>
                 <dd>
                     <a asp-controller="Manage" asp-action="MyOffers" class="btn-bracketed">Check</a>
                 </dd>
@@ -74,6 +75,7 @@
     @if (Model.IsAdmin)
     {
         <div class="hotel-description-div">
+            <h3>Administrator settings</h3>
             <dl class="dl-horizontal">
                 <dt>Users:</dt>
                 <dd>

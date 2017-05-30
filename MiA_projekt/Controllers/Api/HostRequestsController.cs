@@ -1,5 +1,6 @@
 using MiA_projekt.Data;
 using MiA_projekt.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 namespace MiA_projekt.Controllers.Api
 {
     [Produces("application/json")]
-    //[Authorize(Roles = "Admin,Mod")]
+    [Authorize(Roles = "Admin,Mod")]
     public class HostRequestsController : Controller
     {
         private readonly UserManager<AppUser> _userManager;

@@ -498,7 +498,7 @@ namespace MiA_projekt.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddApartment(AddApartmentVM model)
+        public async Task<IActionResult> AddApartment(AddApartmentVM model)
         {
             if (!ModelState.IsValid)
                 return View("Error");
@@ -512,6 +512,9 @@ namespace MiA_projekt.Controllers
             }).Entity;
             _db.SaveChanges();
 
+            string userId = (await GetCurrentUserAsync()).Id;
+            string imagePath = ImageManager.Save(model.ImageFile, userId);
+
             _db.Apartments.Add(new Apartment
             {
                 AddressId = addr.Id,
@@ -519,7 +522,7 @@ namespace MiA_projekt.Controllers
                 From = model.From,
                 To = model.To,
                 GuestCount = model.GuestCount,
-                Image = model.Image,
+                Image = imagePath,
                 Name = model.Name,
                 Price = model.Price
             });

@@ -1,5 +1,4 @@
-﻿using MiA_projekt.Attributes;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace MiA_projekt.Models.ManageViewModels
@@ -27,11 +26,9 @@ namespace MiA_projekt.Models.ManageViewModels
         public short GuestCount { get; set; }
 
         [Required]
-        [FutureDate]
         public DateTime From { get; set; }
 
         [Required]
-        [FutureDate]
         public DateTime To { get; set; }
 
         [Required]

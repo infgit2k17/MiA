@@ -574,3 +574,7 @@ label{
 dataTables_info{
     color:white;
 }
+
+.file-caption-main{
+    max-width:280px;
+}

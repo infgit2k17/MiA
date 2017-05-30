@@ -24,7 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="wwwroot\js\enlarge.js" />
+    <Content Include="wwwroot\css\fileinput.css" />
+    <Content Include="wwwroot\css\fileinput.min.css" />
+    <Content Include="wwwroot\js\fileinput.js" />
+    <Content Include="wwwroot\js\fileinput.min.js" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.0.2" />

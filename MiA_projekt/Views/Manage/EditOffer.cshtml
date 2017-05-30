@@ -1,4 +1,5 @@
-﻿@model EditOfferVM
+﻿
+@model EditOfferVM
 @{
     var @q = Model.Price.ToString();
     string @x = q.Replace(',', '.');
@@ -39,7 +40,10 @@
             <div class="form-group">
                 <label asp-for="Image" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
-                    <input asp-for="Image" class="form-control" type="file" accept="image/x-png,image/gif,image/jpeg" multiple />
+                    @*<input asp-for="Image" class="form-control" type="file" accept="image/x-png,image/gif,image/jpeg" multiple />*@
+                    @*<input asp-for="Image" type="file" class="jfilestyle" data-buttonText="Find files" accept="image/x-png,image/gif,image/jpeg" name="file" multiple>*@
+                    @*<input id="input-id" type="file" class="file" data-preview-file-type="text" asp-for="Image" multiple>*@
+                    <input asp-for="Image" id="file-demo" type="file" class="file" multiple showUpload="false" data-preview-file-type="any" accept="image/x-png,image/gif,image/jpeg">
                     <span asp-validation-for="Image" class="text-danger"></span>
                 </div>
             </div>
@@ -356,12 +360,17 @@
 
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="~/js/fileinput.js"></script>
 
     <script>
         $(document).ready(function () {
             $('select[name=selValue]').val(@Model.CountryCode);
         });
-
     </script>
+}
 
+
+@section Styles{
+    <link rel='stylesheet' type='text/css' href='~/css/fileinput.css' />
 }

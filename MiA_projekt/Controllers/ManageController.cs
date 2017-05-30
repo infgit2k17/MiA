@@ -544,10 +544,9 @@ namespace MiA_projekt.Controllers
             return View();
         }
 
-        public IActionResult HostRequests(HostRequestsVM model)
+        public IActionResult HostRequests()
         {
-            //todog
-            return View();
+            return View(_db.HostRequests.Include(i => i.User).Where(i => !i.IsRejected).Select(_mapper.Map<HostRequest, HostRequestsVM>));
         }
 
         public enum ManageMessageId

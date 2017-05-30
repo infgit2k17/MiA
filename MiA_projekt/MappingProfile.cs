@@ -50,6 +50,9 @@ namespace MiA_projekt
 
             CreateMap<CommentDto, Comment>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
+
+            CreateMap<HostRequest, HostRequestsVM>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.User.Name + " " + src.User.Surname));
         }
     }
 }

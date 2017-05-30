@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MiA_projekt.Models.AccountViewModels
+﻿namespace MiA_projekt.Models.AccountViewModels
 {
-    public class MyOrdersVM
+    public class MyOrderVM
     {
         public int Id { get; set; }
 
@@ -19,5 +14,10 @@ namespace MiA_projekt.Models.AccountViewModels
 
         public string PostalCode { get; set; }
 
+        public string HostName { get; set; }
+
+        public string HostSurname { get; set; }
+
+        public string PhoneNumber { get; set; }
     }
 }

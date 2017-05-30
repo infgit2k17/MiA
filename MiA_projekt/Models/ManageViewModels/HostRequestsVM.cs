@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace MiA_projekt.Models.ManageViewModels
 {
@@ -20,7 +15,6 @@ namespace MiA_projekt.Models.ManageViewModels
         public string DocumentId { get; set; }
 
         [DisplayName("Document photo")]
-        public IFormFile File { get; set; }
-
+        public string Image { get; set; }
     }
 }

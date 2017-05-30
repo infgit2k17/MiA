@@ -303,6 +303,7 @@ namespace MiA_projekt.Controllers
             if (offer.HostId != userId)
                 return BadRequest();
 
+            _mapper.Map(vm, offer);
             offer.Address.City = vm.City;
             offer.Address.PostalCode = vm.PostalCode;
             offer.Address.Street = vm.Street;

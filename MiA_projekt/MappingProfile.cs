@@ -37,9 +37,9 @@ namespace MiA_projekt
             CreateMap<Apartment, EditOfferVM>()
                 .ForMember(dest => dest.Street, opt => opt.MapFrom(src => src.Address.Street))
                 .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.Address.City))
-                .ForMember(dest => dest.PostalCode, opt => opt.MapFrom(src => src.Address.PostalCode))
-                .ForMember(dest => dest.From, opt => opt.MapFrom(src => src.From.ToString("d")))
-                .ForMember(dest => dest.To, opt => opt.MapFrom(src => src.To.ToString("d")));
+                .ForMember(dest => dest.PostalCode, opt => opt.MapFrom(src => src.Address.PostalCode));
+
+            CreateMap<EditOfferVM, Apartment>();
 
             CreateMap<ApartmentDto, Apartment>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())

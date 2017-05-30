@@ -34,12 +34,23 @@
                 <dd style="color:white">aparment.Description</dd>
                 <dt>Address: </dt>
                 <dd style="color:white">aparment.Street, aparment.City, aparment.PostalCode</dd>
+                <dt>Host: </dt>
+                <dd style="color:white"> aparment.HostName aparment.HostSurname</dd>
+                <dt>Phone number: </dt>
+                <dd style="color:white"> aparment.PhoneNumber</dd>
                 <dt>Comment: </dt>
                 <dd>
                     <fieldset class="comment">
                         <textarea cols="80" rows="3" name="tresc" class="expanded placeholder" placeholder="Leave a comment"></textarea>
                     </fieldset>
                 </dd>
+                <dt>Rate: </dt>
+                <dd>
+                    <div class="col-md-10">
+                        <input class="form-control" type="number" min="1" step="0.5" max="5"/>
+                    </div>
+                </dd>
+
                 <button id="clearBtn" class="btn btn-primary" style="margin-left:180px; margin-top:10px">Pay</button>
                 <button id="clearBtn" class="btn btn-primary" style="margin-left:10px; margin-top:10px">Submit</button>
                 <button id="clearBtn" class="btn btn-primary" onclick="onBtnCl(6)" style="margin-left:10px; margin-top:10px">Remove</button>

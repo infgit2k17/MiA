@@ -45,7 +45,8 @@
             <div class="form-group">
                 <label asp-for="Image" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
-                    <input asp-for="Image" class="form-control" type="file" accept="image/x-png,image/gif,image/jpeg"  multiple/>
+                    @*<input asp-for="Image" class="form-control" type="file" accept="image/x-png,image/gif,image/jpeg"  multiple/>*@
+                    <input asp-for="Image" id="file-demo" type="file" class="file" multiple showUpload="false" data-preview-file-type="any" accept="image/x-png,image/gif,image/jpeg">
                     <span asp-validation-for="Image" class="text-danger"></span>
                 </div>
             </div>
@@ -361,6 +362,15 @@
 </form>
 
 
+
+
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="~/js/fileinput.js"></script>
+}
+
+
+@section Styles{
+    <link rel='stylesheet' type='text/css' href='~/css/fileinput.css' />
 }

@@ -9,7 +9,7 @@
         <hr />
         <div class="hotel-description-div">
             <dl class="dl-horizontal">
-                @foreach (var aparment in Model)
+                @*@foreach (var aparment in Model)
                     {
                         <div data-id="@aparment.Id">
                             <h3>@aparment.Name</h3>
@@ -20,7 +20,7 @@
                             <dt>Comment: </dt>
                             <dd>
                                 <fieldset class="comment">
-                                    <textarea cols="80" rows="4" name="tresc" class="expanded placeholder" placeholder="Leave a comment"></textarea>
+                                    <textarea cols="80" rows="3" name="tresc" class="expanded placeholder" placeholder="Leave a comment"></textarea>
                                 </fieldset>
                             </dd>
                             <button id="clearBtn" class="btn btn-primary" style="margin-left:180px; margin-top:10px" onclick="window.location.href='@Url.Action("EditOffer", "Manage", new { id = aparment.Id })';return false;">Edit</button>
@@ -28,7 +28,7 @@
                             <br />
                             <hr />
                         </div>
-                    }
+                    }*@
                 <h3>aparment.Name</h3>
                 <dt>Description: </dt>
                 <dd style="color:white">aparment.Description</dd>
@@ -37,11 +37,11 @@
                 <dt>Comment: </dt>
                 <dd>
                     <fieldset class="comment">
-                        <textarea cols="80" rows="4" name="tresc" class="expanded placeholder" placeholder="Leave a comment"></textarea>
+                        <textarea cols="80" rows="3" name="tresc" class="expanded placeholder" placeholder="Leave a comment"></textarea>
                     </fieldset>
                 </dd>
                 <button id="clearBtn" class="btn btn-primary" style="margin-left:180px; margin-top:10px">Pay</button>
-                <button id="clearBtn" class="btn btn-primary" style="margin-left:180px; margin-top:10px">Submit</button>
+                <button id="clearBtn" class="btn btn-primary" style="margin-left:10px; margin-top:10px">Submit</button>
                 <button id="clearBtn" class="btn btn-primary" onclick="onBtnCl(6)" style="margin-left:10px; margin-top:10px">Remove</button>
                 <br />
                 <hr />

@@ -1,5 +1,6 @@
 ﻿using MiA_projekt.Data;
 using MiA_projekt.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -42,7 +43,7 @@ namespace MiA_projekt.Manager
                 RatingStars = CalculateRates(a.RatePoints, a.RatesCount),
                 Title = a.Name,
                 Description = a.Description,
-                Comments = _db.Comments.Where(i => i.ApartmentId == id).ToList().Select(ToComment)
+                Comments = _db.Comments.Where(i => i.ApartmentId == id).Include(i => i.User).ToList().Select(ToComment) 
             };
         }
 

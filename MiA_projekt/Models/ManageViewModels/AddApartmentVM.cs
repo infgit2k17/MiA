@@ -45,7 +45,6 @@ namespace MiA_projekt.Models.ManageViewModels
         public string PostalCode { get; set; }
 
         [Required]
-        [StringLength(maximumLength: 2, MinimumLength = 2)]
         public string CountryCode { get; set; }
     }
 }

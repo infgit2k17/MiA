@@ -6,31 +6,31 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<form asp-action="BecomeAHost" asp-controller="Manage" method="post" class="form-horizontal">
+<form asp-action="BecomeAHost" asp-controller="Manage" method="post" class="form-horizontal" enctype="multipart/form-data">
     <div class="form-horizontal">
         <h4>Apply</h4>
         <hr />
         <div class="hotel-description-div">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Pesel" class="col-md-2 control-label"></label>
+                <label asp-for="PersonalId" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
-                    <input asp-for="Pesel" class="form-control" />
-                    <span asp-validation-for="Pesel" class="text-danger"></span>
+                    <input asp-for="PersonalId" class="form-control" />
+                    <span asp-validation-for="PersonalId" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="IDnumber" class="col-md-2 control-label"></label>
+                <label asp-for="DocumentId" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
-                    <input asp-for="IDnumber" class="form-control" />
-                    <span asp-validation-for="IDnumber" class="text-danger"></span>
+                    <input asp-for="DocumentId" class="form-control" />
+                    <span asp-validation-for="DocumentId" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="file" class="col-md-2 control-label"></label>
+                <label asp-for="File" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
-                    <input asp-for="file" id="file-demo" type="file" class="file" multiple showUpload="false" data-preview-file-type="any" accept="image/x-png,image/gif,image/jpeg">
-                    <span asp-validation-for="file" class="text-danger"></span>
+                    <input type="file" class="file" name="File" data-preview-file-type="any" accept="image/x-png,image/gif,image/jpeg">
+                    <span asp-validation-for="File" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group">

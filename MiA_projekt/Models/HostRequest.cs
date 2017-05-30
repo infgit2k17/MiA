@@ -8,6 +8,15 @@ namespace MiA_projekt.Models
         [Key]
         public int Id { get; set; }
 
+        [Required]
+        public string Image { get; set; }
+
+        [Required]
+        public string PersonalId { get; set; }
+
+        [Required]
+        public string DocumentId { get; set; }
+
         public string UserId { get; set; }
 
         public AppUser User { get; set; }

@@ -27,38 +27,38 @@
             <dd>
                 <a asp-controller="Manage" asp-action="ChangeAddress" class="btn-bracketed">Change</a>
             </dd>
-            @if (Model.IsHost)
+            <dt>My orders: </dt>
+            <dd>
+                <a asp-controller="Manage" asp-action="MyOrders" class="btn-bracketed">Check</a>
+            </dd>
+            @if (Model.HostStatus == HostStatus.Accepted)
             {
-                @*<dt>Becoma a host: </dt>
-                    <dd>
-                        <a asp-controller="Manage" asp-action="ChangePassword" class="btn-bracketed">Change</a>
-                    </dd>*@
-                <dt>My orders: </dt>
+                <dt>Add offer: </dt>
                 <dd>
-                    <a asp-controller="Manage" asp-action="MyOrders" class="btn-bracketed">Check</a>
+                    <a asp-controller="Manage" asp-action="AddApartment" class="btn-bracketed">Add</a>
                 </dd>
-                      <dt>Add offer: </dt>
-                      <dd>
-                          <a asp-controller="Manage" asp-action="AddApartment" class="btn-bracketed">Add</a>
-                      </dd>
-                      <dt>My offers: </dt>
-                      <dd>
-                          <a asp-controller="Manage" asp-action="MyOffers" class="btn-bracketed">Check</a>
-                      </dd>
+                <dt>My offers: </dt>
+                <dd>
+                    <a asp-controller="Manage" asp-action="MyOffers" class="btn-bracketed">Check</a>
+                </dd>
             }
             else
             {
-                @if (Model.Apply == false)
-                {
-                    <dt>My orders: </dt>
-                    <dd>
-                        <a asp-controller="Manage" asp-action="MyOrders" class="btn-bracketed">Check</a>
-                    </dd>
-                        <dt>Become a host: </dt>
-                        <dd>
-                            <a asp-controller="Manage" asp-action="BecomeAhost" class="btn-bracketed">Apply</a>
-                        </dd>
-                }
+                <dt>Become a host: </dt>
+                <dd>
+                    @if (Model.HostStatus == HostStatus.NotApplying)
+                    {
+                        <a asp-controller="Manage" asp-action="BecomeAhost" class="btn-bracketed">Apply</a>
+                    }
+                    else if (Model.HostStatus == HostStatus.Applying)
+                    {
+                        <p>Waiting for decision...</p>
+                    }
+                    else if (Model.HostStatus == HostStatus.Rejected)
+                    {
+                        <p>Rejected</p>
+                    }
+                </dd>
             }
 
             @*<dt>Add offer: </dt>

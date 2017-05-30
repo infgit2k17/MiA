@@ -15,12 +15,15 @@ namespace MiA_projekt.Models.ManageViewModels
 
         public bool BrowserRemembered { get; set; }
 
-        public bool IsHost { get; set; }
-
         public bool IsModerator { get; set; }
 
         public bool IsAdmin { get; set; }
 
-        public bool Apply { get; set; }
+        public HostStatus HostStatus { get; set; }
+    }
+
+    public enum HostStatus
+    {
+        NotApplying, Applying, Rejected, Accepted
     }
 }

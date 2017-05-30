@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MiA_projekt.Data;
+using MiA_projekt.Manager;
 using MiA_projekt.Models;
 using MiA_projekt.Models.AccountViewModels;
 using MiA_projekt.Models.ManageViewModels;
@@ -12,7 +13,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -67,6 +67,23 @@ namespace MiA_projekt.Controllers
             {
                 return View("Error");
             }
+
+            HostStatus status = HostStatus.NotApplying;
+
+            string userId = _userManager.GetUserId(HttpContext.User);
+            var request = _db.HostRequests.FirstOrDefault(i => i.UserId == userId);
+
+            if (request != null)
+            {
+                if (request.IsRejected)
+                    status = HostStatus.Rejected;
+                else 
+                    status = HostStatus.Applying;
+            }
+
+            if (await _userManager.IsInRoleAsync(user, "Host"))
+                status = HostStatus.Accepted;
+
             var model = new IndexViewModel
             {
                 HasPassword = await _userManager.HasPasswordAsync(user),
@@ -75,8 +92,8 @@ namespace MiA_projekt.Controllers
                 Logins = await _userManager.GetLoginsAsync(user),
                 BrowserRemembered = await _signInManager.IsTwoFactorClientRememberedAsync(user),
                 IsAdmin = await _userManager.IsInRoleAsync(user, "Admin"),
-                IsHost = await _userManager.IsInRoleAsync(user, "Host"),
-                IsModerator = await _userManager.IsInRoleAsync(user, "Mod")
+                IsModerator = await _userManager.IsInRoleAsync(user, "Mod"),
+                HostStatus = status
             };
             return View(model);
         }
@@ -303,19 +320,7 @@ namespace MiA_projekt.Controllers
             if (offer.HostId != userId)
                 return BadRequest();
 
-            var directoryPath = Path.Combine("D:\\mia-images\\", userId);
-            if (!Directory.Exists(directoryPath))
-                Directory.CreateDirectory(directoryPath);
-
-            var filePath = Path.Combine(directoryPath, vm.ImageFile.FileName);
-
-            if (vm.ImageFile.Length > 0)
-            {
-                using (Stream stream = new FileStream(filePath, FileMode.Create))
-                {
-                    vm.ImageFile.CopyTo(stream);
-                }
-            }
+            string filePath = ImageManager.Save(vm.ImageFile, userId);
 
             _mapper.Map(vm, offer);
             offer.Image = filePath;
@@ -444,31 +449,35 @@ namespace MiA_projekt.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> BecomeAhost(IFormFile file)
+        public async Task<IActionResult> BecomeAhost(BecomeAHostVM vm)
         {
             if (!ModelState.IsValid)
                 return View("Error");
 
-            // full path to file in temp location
-            var filePath = Path.GetTempFileName();
-
-            if (file.Length > 0)
-            {
-                using (Stream stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await file.CopyToAsync(stream);
-                }
-            }
-
             string userId = _userManager.GetUserId(HttpContext.User);
+            var request = _db.HostRequests.FirstOrDefault(i => i.UserId == userId);
+
+            if (request != null)
+            {
+                if (request.IsRejected)
+                    return BadRequest("Request has been already rejected by moderator.");
+
+                return BadRequest("Your request has been received, and is being reviewed by moderator.");
+            }
+            
+            string filePath = ImageManager.Save(vm.File, userId);
 
             _db.HostRequests.Add(new HostRequest
             {
                 UserId = userId,
-                Date = DateTime.Now
+                Date = DateTime.Now,
+                DocumentId = vm.DocumentId,
+                PersonalId = vm.PersonalId,
+                Image = filePath
             });
+            _db.SaveChanges();
 
-            return Ok();
+            return RedirectToAction("Index");
         }
 
         public IActionResult AddApartment()

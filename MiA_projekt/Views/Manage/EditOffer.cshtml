@@ -7,12 +7,12 @@
 
 <h2>Edit offer</h2>
 
-<form asp-action="AddApartment">
+<form asp-action="EditOffer" asp-controller="Manage" method="post" class="form-horizontal">
     <div class="form-horizontal">
         <h4>Apartment</h4>
         <hr />
         <div class="hotel-description-div">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
@@ -62,27 +62,6 @@
                 <div class="col-md-10">
                     <input type="date" min=@DateTime.Today asp-for="To" class="form-control" value="@Model.To"/>
                     <span asp-validation-for="To" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="Street" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="Street" class="form-control" value="@Model.Street"/>
-                    <span asp-validation-for="Street" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="City" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="City" class="form-control" value="@Model.City"/>
-                    <span asp-validation-for="City" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="PostalCode" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="PostalCode" class="form-control" value="@Model.PostalCode"/>
-                    <span asp-validation-for="PostalCode" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group">
@@ -342,6 +321,27 @@
                 </div>
             </div>
             <div class="form-group">
+                <label asp-for="Street" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="Street" class="form-control" value="@Model.Street"/>
+                    <span asp-validation-for="Street" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="City" class="form-control" value="@Model.City"/>
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostalCode" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="PostalCode" class="form-control" value="@Model.PostalCode"/>
+                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <section class="contentButton">
                         <div class="Search">
@@ -349,7 +349,7 @@
                         </div>
                     </section>
                 </div>
-            </div>
+            </div> 
         </div>
     </div>
 </form>

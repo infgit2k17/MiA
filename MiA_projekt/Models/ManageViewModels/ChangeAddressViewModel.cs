@@ -16,7 +16,6 @@ namespace MiA_projekt.Models.ManageViewModels
         [StringLength(100, ErrorMessage = "This field is required")]
         public string PostalCode { get; set; }
 
-        [Required]
         [StringLength(100, ErrorMessage = "This field is required")]
         public string CountryCode { get; set; }
     }

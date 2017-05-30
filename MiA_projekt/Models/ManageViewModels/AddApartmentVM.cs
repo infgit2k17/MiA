@@ -1,5 +1,6 @@
 ﻿using MiA_projekt.Attributes;
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace MiA_projekt.Models.ManageViewModels
@@ -42,10 +43,12 @@ namespace MiA_projekt.Models.ManageViewModels
 
         [Required]
         [StringLength(maximumLength: 10, MinimumLength = 3)]
+        [DisplayName("Postal code")]
         public string PostalCode { get; set; }
 
         [Required]
         [StringLength(maximumLength: 2, MinimumLength = 2)]
+        [DisplayName("Country")]
         public string CountryCode { get; set; }
     }
 }

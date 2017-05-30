@@ -543,8 +543,35 @@ namespace MiA_projekt.Controllers
 
         public IActionResult MyOrders()
         {
-            //todog
-            return View();
+            string userId = _userManager.GetUserId(HttpContext.User);
+
+            return View(_db.Offers.Where(i => i.GuestId == userId).Select(ToMyOrderVM));
+        }
+
+        public MyOrderVM ToMyOrderVM(Offer offer)
+        {
+            var apartment = _db.Apartments.Find(offer.ApartmentId);
+            var address = _db.Addresses.Find(apartment.AddressId);
+            var host = _db.Users.Find(apartment.HostId);
+            var comment = _db.Comments.FirstOrDefault(i => i.ApartmentId == apartment.Id);
+            string commentText = null;
+
+            if (comment != null)
+                commentText = comment.Text;
+
+            return new MyOrderVM
+            {
+                Id = offer.Id,
+                Name = apartment.Name,
+                Description = apartment.Description,
+                Street = address.Street,
+                City = address.City,
+                PostalCode = address.PostalCode,
+                HostName = host.Name,
+                HostSurname = host.Surname,
+                PhoneNumber = host.PhoneNumber,
+                Comment = commentText
+            };
         }
 
         public IActionResult HostRequests()

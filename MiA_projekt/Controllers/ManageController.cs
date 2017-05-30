@@ -303,7 +303,12 @@ namespace MiA_projekt.Controllers
             if (offer.HostId != userId)
                 return BadRequest();
 
-            var filePath = Path.GetTempFileName();
+            var directoryPath = Path.Combine("D:\\mia-images\\", userId);
+            if (!Directory.Exists(directoryPath))
+                Directory.CreateDirectory(directoryPath);
+
+            var filePath = Path.Combine(directoryPath, vm.ImageFile.FileName);
+
             if (vm.ImageFile.Length > 0)
             {
                 using (Stream stream = new FileStream(filePath, FileMode.Create))
@@ -313,6 +318,7 @@ namespace MiA_projekt.Controllers
             }
 
             _mapper.Map(vm, offer);
+            offer.Image = filePath;
             offer.Address.City = vm.City;
             offer.Address.PostalCode = vm.PostalCode;
             offer.Address.Street = vm.Street;

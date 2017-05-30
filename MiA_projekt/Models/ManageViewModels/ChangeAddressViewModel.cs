@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace MiA_projekt.Models.ManageViewModels
 {
@@ -14,9 +15,11 @@ namespace MiA_projekt.Models.ManageViewModels
 
         [Required]
         [StringLength(100, ErrorMessage = "This field is required")]
+        [DisplayName("Postal code")]
         public string PostalCode { get; set; }
 
         [StringLength(100, ErrorMessage = "This field is required")]
+        [DisplayName("Country")]
         public string CountryCode { get; set; }
     }
 }

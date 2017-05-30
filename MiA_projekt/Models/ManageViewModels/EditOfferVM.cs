@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace MiA_projekt.Models.ManageViewModels
@@ -19,7 +21,9 @@ namespace MiA_projekt.Models.ManageViewModels
         public decimal Price { get; set; }
 
         [Required]
-        public string Image { get; set; }
+        public string Image { get; set; } 
+        
+        public IFormFile ImageFile { get; set; }
 
         [Required]
         [Display(Name = "Guest Count")]
@@ -41,9 +45,11 @@ namespace MiA_projekt.Models.ManageViewModels
 
         [Required]
         [StringLength(maximumLength: 10, MinimumLength = 3)]
+        [DisplayName("Postal code")]
         public string PostalCode { get; set; }
 
         [Required]
+        [DisplayName("Country")]
         public string CountryCode { get; set; }
     }
 }

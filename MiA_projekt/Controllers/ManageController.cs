@@ -303,6 +303,15 @@ namespace MiA_projekt.Controllers
             if (offer.HostId != userId)
                 return BadRequest();
 
+            var filePath = Path.GetTempFileName();
+            if (vm.ImageFile.Length > 0)
+            {
+                using (Stream stream = new FileStream(filePath, FileMode.Create))
+                {
+                    vm.ImageFile.CopyTo(stream);
+                }
+            }
+
             _mapper.Map(vm, offer);
             offer.Address.City = vm.City;
             offer.Address.PostalCode = vm.PostalCode;
@@ -499,6 +508,7 @@ namespace MiA_projekt.Controllers
                 Name = model.Name,
                 Price = model.Price
             });
+            _db.SaveChanges();
 
             return RedirectToAction("Index");
         }

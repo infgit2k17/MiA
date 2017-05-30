@@ -71,5 +71,11 @@ namespace MiA_projekt.Controllers
             if (await _userManager.IsInRoleAsync(user, "Mod"))
                 ViewBag.Editor = false;
         }
+
+        public IActionResult HostRequests()
+        {
+            //todog
+            return View();
+        }
     }
 }

@@ -544,6 +544,11 @@ namespace MiA_projekt.Controllers
             return View();
         }
 
+        public IActionResult HostRequests(HostRequestsVM model)
+        {
+            //todog
+            return View();
+        }
 
         public enum ManageMessageId
         {

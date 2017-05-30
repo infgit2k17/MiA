@@ -529,6 +529,13 @@ namespace MiA_projekt.Controllers
             }
         }
 
+        public IActionResult MyOrders()
+        {
+            //todog
+            return View();
+        }
+
+
         public enum ManageMessageId
         {
             AddPhoneSuccess,

@@ -1,3 +1,4 @@
+@using System.Collections.Generic
 @model IEnumerable<MyOrderVM>
 @{
     ViewData["Title"] = "My orders";
@@ -25,28 +26,26 @@
                     {
                         <dd>
                             <dt>Comment: </dt>
-                            <form asp-action="MyOrders" asp-controller="Manage" method="post" class="form-horizontal">
-                                <div asp-validation-summary="All" class="text-danger"></div>
-                                <div class="col-md-10">
-                                    <textarea asp-for="@aparment.Comment" placeholder="Comment.."></textarea>
-                                    <span asp-validation-for="@aparment.Comment" class="text-danger"></span>
-                                </div>
-                                <dt>Rate: </dt>
-                                <div class="col-md-10">
-                                    <input class="form-control" type="number" min="1" step="1" max="5" asp-for="@aparment.Rate" />
-                                    <span asp-validation-for="@aparment.Rate" class="text-danger"></span>
-                                </div>
-                                <input type="hidden" asp-for="@aparment.ApartmentId">
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                            <div class="Search">
-                                                @*<button type="submit" class="button">Submit</button>*@
-                                                <button id="clearBtn" class="btn btn-primary" type="submit" style="margin-top:10px">Comment</button>
-                                            </div>
+                        </dd>
+                        <form asp-action="MyOrders" asp-controller="Manage" method="post" class="form-horizontal">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="col-md-10">
+                                <textarea name="Comment" placeholder="Comment.."></textarea>
+                            </div>
+                            <dt>Rate: </dt>
+                            <div class="col-md-10">
+                                <input class="form-control" type="number" min="1" step="1" max="5" name="Rate" />
+                            </div>
+                            <input type="hidden" name="ApartmentId" value="@aparment.ApartmentId">
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <div class="Search">
+                                        @*<button type="submit" class="button">Submit</button>*@
+                                        <button id="clearBtn" class="btn btn-primary" type="submit" style="margin-top:10px">Comment</button>
                                     </div>
                                 </div>
-                            </form>
-                        </dd>
+                            </div>
+                        </form>
                     }
                     <button id="clearBtn" class="btn btn-primary" style="margin-left:175px" onclick="window.location.href='https://pay.g2a.com/panel'">Pay</button>
                     @*<button id="clearBtn" class="btn btn-primary" style="margin-left:10px; margin-top:10px">Submit</button>*@

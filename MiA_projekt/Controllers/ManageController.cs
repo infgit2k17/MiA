@@ -570,7 +570,7 @@ namespace MiA_projekt.Controllers
         }
 
         [HttpPost]
-        public IActionResult MyOrders(MyOrderVM vm)
+        public IActionResult MyOrders(CommentVm2 vm)
         {
             var apartment = _db.Apartments.Find(vm.ApartmentId);
             apartment.RatePoints += vm.Rate;

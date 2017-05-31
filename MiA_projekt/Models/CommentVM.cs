@@ -6,4 +6,13 @@
 
         public string Comment { get; set; }
     }
+
+    public class CommentVm2
+    {
+        public string Comment { get; set; }
+
+        public int Rate { get; set; }
+
+        public int ApartmentId { get; set; }
+    }
 }

@@ -37,5 +37,16 @@ namespace MiA_projekt.Controllers.Api
 
             return Ok();
         }
+
+        [HttpDelete]
+        [Route("api/offers/{id}")]
+        public IActionResult Cancel(int id)
+        {
+            var offer = _db.Offers.Find(id);
+            _db.Offers.Remove(offer);
+            _db.SaveChanges();
+
+            return Ok();
+        }
     }
 }

@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace MiA_projekt.Models.AccountViewModels
+﻿namespace MiA_projekt.Models.AccountViewModels
 {
     public class MyOrderVM
     {
         public int Id { get; set; }
+
+        public int ApartmentId { get; set; }
 
         public string Name { get; set; }
 
@@ -22,10 +22,8 @@ namespace MiA_projekt.Models.AccountViewModels
 
         public string PhoneNumber { get; set; }
 
-        [Required]
         public string Comment { get; set; }
 
-        [Required]
         public int Rate { get; set; }
     }
 }

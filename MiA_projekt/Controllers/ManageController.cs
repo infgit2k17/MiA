@@ -336,6 +336,7 @@ namespace MiA_projekt.Controllers
             apartment.Address.City = vm.City;
             apartment.Address.PostalCode = vm.PostalCode;
             apartment.Address.Street = vm.Street;
+            apartment.Thumbnail = filePaths.First();
 
             _db.SaveChanges();
 
@@ -533,7 +534,7 @@ namespace MiA_projekt.Controllers
                 GuestCount = model.GuestCount,
                 Name = model.Name,
                 Price = model.Price,
-                HostId = userId
+                HostId = userId,
             }).Entity;
             _db.SaveChanges();
 
@@ -545,6 +546,7 @@ namespace MiA_projekt.Controllers
                     Url = path
                 });
             }
+            apartment.Thumbnail = paths.First();
             _db.SaveChanges();
 
             return RedirectToAction("Index");

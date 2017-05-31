@@ -574,6 +574,7 @@ namespace MiA_projekt.Controllers
             };
         }
 
+
         public IActionResult HostRequests()
         {
             return View(_db.HostRequests.Include(i => i.User).Where(i => !i.IsRejected).Select(_mapper.Map<HostRequest, HostRequestsVM>));

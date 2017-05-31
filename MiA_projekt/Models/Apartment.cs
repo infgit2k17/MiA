@@ -13,11 +13,9 @@ namespace MiA_projekt.Models
         public AppUser Host { get; set; }
 
         [Required]
-        [StringLength(maximumLength: 30, MinimumLength = 5)]
         public string Name { get; set; }
 
         [Required]
-        [StringLength(maximumLength: 500)]
         public string Description { get; set; }
 
         public int AddressId { get; set; }

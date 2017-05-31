@@ -12,7 +12,6 @@ namespace MiA_projekt.Models
         public Apartment Apartment { get; set; }
 
         [Required]
-        [StringLength(maximumLength: 50)]
         public string Url { get; set; }
     }
 }

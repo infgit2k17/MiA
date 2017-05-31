@@ -25,7 +25,7 @@ namespace MiA_projekt.Manager
                                     new ApartmentVM
                                     {
                                         Id = o.Id,
-                                        ImageUrl = GetImages(o.Id).First(),
+                                        ImageUrl = o.Thumbnail,
                                         Price = o.Price,
                                         RatingStars = CalculateRates(o.RatePoints, o.RatesCount),
                                         Title = o.Name

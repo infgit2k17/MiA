@@ -22,6 +22,7 @@ namespace MiA_projekt.Controllers
     public class 
         ManageController : Controller
     {
+
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly string _externalCookieScheme;
@@ -531,7 +532,8 @@ namespace MiA_projekt.Controllers
                 To = model.To,
                 GuestCount = model.GuestCount,
                 Name = model.Name,
-                Price = model.Price
+                Price = model.Price,
+                HostId = userId
             }).Entity;
             _db.SaveChanges();
 

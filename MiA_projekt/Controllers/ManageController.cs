@@ -550,7 +550,7 @@ namespace MiA_projekt.Controllers
 
         public MyOrderVM ToMyOrderVM(Offer offer)
         {
-            var apartment = _db.Apartments.Find(offer.ApartmentId);
+            var apartment = _db.Apartments.Find(offer.ApartmentId); 
             var address = _db.Addresses.Find(apartment.AddressId);
             var host = _db.Users.Find(apartment.HostId);
             var comment = _db.Comments.FirstOrDefault(i => i.ApartmentId == apartment.Id);

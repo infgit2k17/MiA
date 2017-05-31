@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace MiA_projekt.Models.AccountViewModels
+﻿namespace MiA_projekt.Models.AccountViewModels
 {
     public class MyOrderVM
     {

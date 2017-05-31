@@ -27,8 +27,6 @@ namespace MiA_projekt.Models
         [Range(1, 10000)]
         public decimal Price { get; set; }
 
-        public string Image { get; set; }
-
         [Range(1, 1000)]
         public short GuestCount { get; set; }
 

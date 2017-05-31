@@ -23,7 +23,5 @@ namespace MiA_projekt.Models.AccountViewModels
         public string PhoneNumber { get; set; }
 
         public string Comment { get; set; }
-
-        public string Rate { get; set; }
     }
 }

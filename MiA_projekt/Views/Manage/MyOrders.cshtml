@@ -36,6 +36,7 @@
                                     <input class="form-control" type="number" min="1" step="1" max="5" asp-for="@aparment.Rate" />
                                     <span asp-validation-for="@aparment.Rate" class="text-danger"></span>
                                 </div>
+                                <input type="hidden" asp-for="@aparment.Id">
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-md-10">
                                             <div class="Search">
@@ -47,9 +48,9 @@
                             </form>
                         </dd>
                     }
-                    <button id="clearBtn" class="btn btn-primary" style="margin-left:180px; margin-top:10px">Pay</button>
+                    <button id="clearBtn" class="btn btn-primary" style="margin-left:175px" onclick="window.location.href='https://pay.g2a.com/panel'">Pay</button>
                     @*<button id="clearBtn" class="btn btn-primary" style="margin-left:10px; margin-top:10px">Submit</button>*@
-                    <button id="clearBtn" class="btn btn-primary" onclick="onBtnCl(@aparment.Id)" style="margin-left:10px; margin-top:10px">Cancel</button>
+                    <button id="clearBtn" class="btn btn-primary" onclick="onBtnCl(@aparment.Id)" style="margin-left:10px">Cancel</button>
                     <br />
                     <hr />
                 </div>

@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 namespace MiA_projekt.Controllers
 {
     [Authorize]
-    public class 
+    public class
         ManageController : Controller
     {
 
@@ -78,7 +78,7 @@ namespace MiA_projekt.Controllers
             {
                 if (request.IsRejected)
                     status = HostStatus.Rejected;
-                else 
+                else
                     status = HostStatus.Applying;
             }
 
@@ -452,10 +452,10 @@ namespace MiA_projekt.Controllers
 
             return View(_mapper.Map<Address, ChangeAddressViewModel>(addr));
         }
-        
+
         public IActionResult BecomeAhost()
         {
-            return View(); 
+            return View();
         }
 
         [HttpPost]
@@ -474,7 +474,7 @@ namespace MiA_projekt.Controllers
 
                 return BadRequest("Your request has been received, and is being reviewed by moderator.");
             }
-            
+
             string filePath = ImageManager.Save(vm.File, userId);
 
             _db.HostRequests.Add(new HostRequest
@@ -569,9 +569,23 @@ namespace MiA_projekt.Controllers
             return View(_db.Offers.Where(i => i.GuestId == userId).Select(ToMyOrderVM));
         }
 
+        [HttpPost]
+        public IActionResult MyOrders(MyOrderVM vm)
+        {
+            var apartment = _db.Apartments.Find(vm.ApartmentId);
+            apartment.RatePoints += vm.Rate;
+            apartment.RatesCount++;
+
+            string userId = _userManager.GetUserId(HttpContext.User);
+            _db.Comments.Add(new Comment { ApartmentId = vm.ApartmentId, UserId = userId, Text = vm.Comment });
+            _db.SaveChanges();
+
+            return MyOrders();
+        }
+
         public MyOrderVM ToMyOrderVM(Offer offer)
         {
-            var apartment = _db.Apartments.Find(offer.ApartmentId); 
+            var apartment = _db.Apartments.Find(offer.ApartmentId);
             var address = _db.Addresses.Find(apartment.AddressId);
             var host = _db.Users.Find(apartment.HostId);
             var comment = _db.Comments.FirstOrDefault(i => i.ApartmentId == apartment.Id);
@@ -583,6 +597,7 @@ namespace MiA_projekt.Controllers
             return new MyOrderVM
             {
                 Id = offer.Id,
+                ApartmentId = apartment.Id,
                 Name = apartment.Name,
                 Description = apartment.Description,
                 Street = address.Street,

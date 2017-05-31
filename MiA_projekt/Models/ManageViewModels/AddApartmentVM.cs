@@ -1,6 +1,6 @@
-﻿using MiA_projekt.Attributes;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -20,8 +20,8 @@ namespace MiA_projekt.Models.ManageViewModels
         public decimal Price { get; set; }
 
         [Required]
-        [DisplayName("Image")]
-        public IFormFile ImageFile { get; set; }
+        [DisplayName("Images")]
+        public List<IFormFile> Images { get; set; }
 
         [Required]
         [Display(Name = "Guest Count")]

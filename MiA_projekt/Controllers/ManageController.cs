@@ -311,22 +311,30 @@ namespace MiA_projekt.Controllers
             if (!ModelState.IsValid)
                 return BadRequest("Invalid model");
 
-            var offer = _db.Apartments.Include(i => i.Address).FirstOrDefault(i => i.Id == vm.Id);
+            var apartment = _db.Apartments.Include(i => i.Address).FirstOrDefault(i => i.Id == vm.Id);
 
-            if (offer == null)
+            if (apartment == null)
                 return NotFound();
 
             string userId = _userManager.GetUserId(HttpContext.User);
-            if (offer.HostId != userId)
+            if (apartment.HostId != userId)
                 return BadRequest();
 
-            string filePath = ImageManager.Save(vm.ImageFile, userId);
+            var filePaths = ImageManager.Save(vm.Images, userId);
 
-            _mapper.Map(vm, offer);
-            offer.Image = filePath;
-            offer.Address.City = vm.City;
-            offer.Address.PostalCode = vm.PostalCode;
-            offer.Address.Street = vm.Street;
+            foreach (var path in filePaths)
+            {
+                _db.Images.Add(new Image
+                {
+                    ApartmentId = apartment.Id,
+                    Url = path
+                });
+            }
+
+            _mapper.Map(vm, apartment);
+            apartment.Address.City = vm.City;
+            apartment.Address.PostalCode = vm.PostalCode;
+            apartment.Address.Street = vm.Street;
 
             _db.SaveChanges();
 
@@ -501,7 +509,7 @@ namespace MiA_projekt.Controllers
         public async Task<IActionResult> AddApartment(AddApartmentVM model)
         {
             if (!ModelState.IsValid)
-                return View("Error");
+                return BadRequest();
 
             Address addr = _db.Addresses.Add(new Address
             {
@@ -513,19 +521,28 @@ namespace MiA_projekt.Controllers
             _db.SaveChanges();
 
             string userId = (await GetCurrentUserAsync()).Id;
-            string imagePath = ImageManager.Save(model.ImageFile, userId);
+            var paths = ImageManager.Save(model.Images, userId);
 
-            _db.Apartments.Add(new Apartment
+            var apartment = _db.Apartments.Add(new Apartment
             {
                 AddressId = addr.Id,
                 Description = model.Description,
                 From = model.From,
                 To = model.To,
                 GuestCount = model.GuestCount,
-                Image = imagePath,
                 Name = model.Name,
                 Price = model.Price
-            });
+            }).Entity;
+            _db.SaveChanges();
+
+            foreach (var path in paths)
+            {
+                _db.Images.Add(new Image
+                {
+                    ApartmentId = apartment.Id,
+                    Url = path
+                });
+            }
             _db.SaveChanges();
 
             return RedirectToAction("Index");
@@ -550,7 +567,7 @@ namespace MiA_projekt.Controllers
 
         public MyOrderVM ToMyOrderVM(Offer offer)
         {
-            var apartment = _db.Apartments.Find(offer.ApartmentId);
+            var apartment = _db.Apartments.Find(offer.ApartmentId); 
             var address = _db.Addresses.Find(apartment.AddressId);
             var host = _db.Users.Find(apartment.HostId);
             var comment = _db.Comments.FirstOrDefault(i => i.ApartmentId == apartment.Id);
@@ -573,6 +590,7 @@ namespace MiA_projekt.Controllers
                 Comment = commentText
             };
         }
+
 
         public IActionResult HostRequests()
         {

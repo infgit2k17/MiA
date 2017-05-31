@@ -70,7 +70,8 @@
                             <div class="SearchOffleft" style="border-left:1px solid #000; height:120px; padding-top: 30px;">
                                 <section class="contentButton">
                                     <div class="Searchv2" style="margin:0 auto">
-                                        <button id="btnCheck" data-id="@Model.Id" class="buttonv2" href="" onclick="onBtnCl()">Book now</button>
+                                        @*<button id="btnCheck" class="buttonv2" href="" onclick="onBtnCl(@Model.Id)">Book now</button>*@
+                                        <button id="btnCheck" class="buttonv2" onclick="onBtnCl(@Model.Id)">Book now</button>
                                     </div>
                                     @*@Html.ActionLink("Description", "Description", new { id = aparment.id }); *@
                                 </section>
@@ -170,11 +171,10 @@
 
     <script>
 
-            function onBtnCl() {
-                var button = $(this);
+            function onBtnCl(id) {
                 swal({
                     title: "Confirmation required!",
-                    text: "Do you want to order the apartment?" /*+ button.attr("data-id") + "?"*/,
+                    text: "Do you want to order the apartment?" + id /*+ button.attr("data-id") + "?"*/,
                     //type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "green",
@@ -184,7 +184,7 @@
                     function (isConfirm) {
                         if (isConfirm) {
                             $.ajax({
-                                url: '/api/apartments/' + button.attr("data-id"),
+                                url: '/api/apartments/' + id,
                                 type: 'POST',
                                 contentType: 'application/json; charset=utf-8',
                                 success: function () {
